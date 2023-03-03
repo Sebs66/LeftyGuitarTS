@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css"> 
+    <script  type="module" src="./build/index.js" defer></script>
+</head>
+<body>
+    <header class="header">
+        <h1 class="titulo">Escalas</h1>
+        <hr>
+        <h2 class="subtitulo">Version 3</h2>
+        <nav>
+        </nav>
+    </header>
+    <main class="principal"> 
+        <!-- 
+            En el main tendremos la guitarra, las notas que componen la escala y sus intervalos y otra guitarra mostrando los intervalos.
+        -->
+        <div class="direccionGuitarra">
+            <button id="leftGuitarra" onclick="direccionGuitarraLeft(this.value)" value='left' class="leftGuitarra botonSeleccionado">Lefty Guitar  &nbsp <img src="./images/heart.png"></button>
+            <button id="rightGuitarra" onclick="direccionGuitarraRight(this.value)" value='right' class="rightGuitarra">Righty Guitar</button>
+        </div>
+        <div class="guitarra">
+            <div class="cuerdasCuello"> <!-- Elemento para generar las cuerdas de la guitarra -->
+                <div class="cuerda "></div>
+                <div class="cuerda"></div>
+                <div class="cuerda"></div>
+                <div class="cuerda"></div>
+                <div class="cuerda"></div>
+                <div class="cuerda"></div>
+            </div>
+            <div class="cuello">
+                <div class="traste traste1">
+                    <div class="cuerda cuerdae cuerdae1"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerda cuerdaB cuerdaB1"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerda cuerdaG cuerdaG1"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                    <div class="cuerda cuerdaD cuerdaD1"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                    <div class="cuerda cuerdaA cuerdaA1"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerda cuerdaE cuerdaE1"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                </div>
+                <div class="traste traste2">
+                    <div class="cuerdae cuerdae2"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                    <div class="cuerdaB cuerdaB2"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                    <div class="cuerdaG cuerdaG2"><p class="nota nA">A</p></div>
+                    <div class="cuerdaD cuerdaD2"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                    <div class="cuerdaA cuerdaA2"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                    <div class="cuerdaE cuerdaE2"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                </div>
+                <div class="traste traste3">
+                    <div class="cuerdae cuerdae3"><p class="nota nG">G</p></div>
+                    <div class="cuerdaB cuerdaB3"><p class="nota nD">D</p></div>
+                    <div class="cuerdaG cuerdaG3"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerdaD cuerdaD3"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerdaA cuerdaA3"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerdaE cuerdaE3"><p class="nota nG">G</p></div>
+                </div>
+                <div class="traste traste4">
+                    <div class="cuerdae cuerdae4"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                    <div class="cuerdaB cuerdaB4"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                    <div class="cuerdaG cuerdaG4"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                    <div class="cuerdaD cuerdaD4"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                    <div class="cuerdaA cuerdaA4"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                    <div class="cuerdaE cuerdaE4"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                </div>
+                <div class="traste traste5">
+                    <div class="cuerdae cuerdae5"><p class="nota nA">A</p></div>
+                    <div class="cuerdaB cuerdaB5"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                    <div class="cuerdaG cuerdaG5"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerdaD cuerdaD5"><p class="nota nG">G</p></div>
+                    <div class="cuerdaA cuerdaA5"><p class="nota nD">D</p></div>
+                    <div class="cuerdaE cuerdaE5"><p class="nota nA">A</p></div>
+                </div>
+                <div class="traste traste6">
+                    <div class="cuerdae cuerdae6"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerdaB cuerdaB6"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerdaG cuerdaG6"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                    <div class="cuerdaD cuerdaD6"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                    <div class="cuerdaA cuerdaA6"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                    <div class="cuerdaE cuerdaE6"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                </div>
+                <div class="traste traste7">
+                    <div class="cuerdae cuerdae7"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                    <div class="cuerdaB cuerdaB7"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                    <div class="cuerdaG cuerdaG7"><p class="nota nD">D</p></div>
+                    <div class="cuerdaD cuerdaD7"><p class="nota nA">A</p></div>
+                    <div class="cuerdaA cuerdaA7"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                    <div class="cuerdaE cuerdaE7"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                </div>
+                <div class="traste traste8">
+                    <div class="cuerdae cuerdae8"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerdaB cuerdaB8"><p class="nota nG">G</p></div>
+                    <div class="cuerdaG cuerdaG8"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                    <div class="cuerdaD cuerdaD8"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerdaA cuerdaA8"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerdaE cuerdaE8"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                </div>
+                <div class="traste traste9">
+                    <div class="cuerdae cuerdae9"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                    <div class="cuerdaB cuerdaB9"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                    <div class="cuerdaG cuerdaG9"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                    <div class="cuerdaD cuerdaD9"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                    <div class="cuerdaA cuerdaA9"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                    <div class="cuerdaE cuerdaE9"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                </div>
+                <div class="traste traste10">
+                    <div class="cuerdae cuerdae10"><p class="nota nD">D</p></div>
+                    <div class="cuerdaB cuerdaB10"><p class="nota nA">A</p></div>
+                    <div class="cuerdaG cuerdaG10"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerdaD cuerdaD10"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerdaA cuerdaA10"><p class="nota nG">G</p></div>
+                    <div class="cuerdaE cuerdaE10"><p class="nota nD">D</p></div>
+                </div>
+                <div class="traste traste11">
+                    <div class="cuerdae cuerdae11"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                    <div class="cuerdaB cuerdaB11"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerdaG cuerdaG11"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                    <div class="cuerdaD cuerdaD11"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                    <div class="cuerdaA cuerdaA11"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                    <div class="cuerdaE cuerdaE11"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                </div>
+                <div class="traste traste12">
+                    <div class="cuerdae cuerdae12"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                    <div class="cuerdaB cuerdaB12"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                    <div class="cuerdaG cuerdaG12"><p class="nota nG">G</p></div>
+                    <div class="cuerdaD cuerdaD12"><p class="nota nD">D</p></div>
+                    <div class="cuerdaA cuerdaA12"><p class="nota nA">A</p></div>
+                    <div class="cuerdaE cuerdaE12"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                </div>
+                <div class="traste traste13">
+                    <div class="cuerdae cuerdae13"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerdaB cuerdaB13"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerdaG cuerdaG13"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                    <div class="cuerdaD cuerdaD13"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                    <div class="cuerdaA cuerdaA13"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerdaE cuerdaE13"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                </div>
+                <div class="traste traste14">
+                    <div class="cuerdae cuerdae14"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                    <div class="cuerdaB cuerdaB14"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                    <div class="cuerdaG cuerdaG14"><p class="nota nA">A</p></div>
+                    <div class="cuerdaD cuerdaD14"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                    <div class="cuerdaA cuerdaA14"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                    <div class="cuerdaE cuerdaE14"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                </div>
+                <div class="traste traste15">
+                    <div class="cuerdae cuerdae15"><p class="nota nG">G</p></div>
+                    <div class="cuerdaB cuerdaB15"><p class="nota nD">D</p></div>
+                    <div class="cuerdaG cuerdaG15"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerdaD cuerdaD15"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerdaA cuerdaA15"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerdaE cuerdaE15"><p class="nota nG">G</p></div>
+                </div>
+            </div>
+            <div class="notasCuerdas">
+                <div class="traste">
+                    <div class="open nE">e</div>
+                    <div class="open nB">B</div>
+                    <div class="open nG">G</div>
+                    <div class="open nD">D</div>
+                    <div class="open nA">A</div>
+                    <div class="open nE">E</div>
+                </div>
+            </div>
+            <div class="numerosTrastes">
+                <div class="numerosTrastes__traste"><p class="outNeck left"></p><p class="inNeck left"></p></div> <!-- 15 -->
+                <div class="numerosTrastes__traste"></div> <!-- 14 -->
+                <div class="numerosTrastes__traste"><p class="outNeck right hide"></p><p class="inNeck right hide"></p></div> <!-- 13 -->
+                <div class="numerosTrastes__traste traste12"><p class="outNeck left"></p><p class="outNeck left"></p><p class="inNeck left"></p><p class="inNeck left"></p></div> <!-- 12 -->
+                <div class="numerosTrastes__traste"><p class="outNeck right hide"></p><p class="inNeck right hide"></p></div> <!-- 11 -->
+                <div class="numerosTrastes__traste"></div> <!-- 10 -->
+                <div class="numerosTrastes__traste"><p class="outNeck"></p><p class="inNeck"></p></div> <!-- 9 -->
+                <div class="numerosTrastes__traste"></div> <!-- 8 -->
+                <div class="numerosTrastes__traste"><p class="outNeck"></p><p class="inNeck"></p></div> <!-- 7 -->
+                <div class="numerosTrastes__traste"></div> <!-- 6 -->
+                <div class="numerosTrastes__traste"><p class="outNeck"></p><p class="inNeck"></p></div> <!-- 5 -->
+                <div class="numerosTrastes__traste traste12right"><p class="outNeck right hide"></p><p class="outNeck right hide"></p><p class="inNeck right hide"></p><p class="inNeck right hide"></p></div> <!-- 4 -->
+                <div class="numerosTrastes__traste"><p class="outNeck left"></p><p class="inNeck left"></p></div> <!-- 3 -->
+                <div class="numerosTrastes__traste"></div> <!-- 2 -->
+                <div class="numerosTrastes__traste"><p class="outNeck right hide"></p><p class="inNeck right hide"></p></div> <!-- 1 -->
+
+
+
+            </div>
+        </div>
+        <div class="tabla">
+            <div class="escala"> <h3>Escala</h3>
+                <div class="dropDownMenues">
+                    <select id = "escala" name="escala" onmousedown="this.value = '';" onchange = "update();"> <!-- Funcción  que modifica la escala. -->
+                        <option value="major">Mayor</option>
+                        <option value="minor">Menor Natural</option>
+                        <option value="pentatonicMajor">Pentatonica Mayor</option>
+                        <option value="pentatonicMinor">Pentatonica Menor Natural</option>
+                    </select>
+                </div>
+            </div>
+            <div class="tabla__tonos">
+                <p id='tono1' class="">T</p>
+                <p id='tono2' class="tono2Mayor ">T</p>
+                <p id='tono3' class="">T</p>
+                <p id='tono4' class="tono4Mayor">T</p>
+                <p id= 'tono5' class="tono5Mayor">T</p> 
+                <p id='semiTono1' class="semiTono1Mayor">S</p> 
+                <p id='semiTono2' class="semiTono2Mayor">S</p>            
+            </div>
+            <div class="key"><h3>Root Note</h3>
+                <select id = "rootNote" name = "rootNote" onmousedown="this.value='';" onchange = "update();">
+                    <option value="C">C</option>
+                    <option value="C#">C#</option>
+                    <option value="Db">Db</option>
+                    <option value="D">D</option>
+                    <option value="D#">D#</option>
+                    <option value="Eb">Eb</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="F#">F#</option>
+                    <option value="Gb">Gb</option>
+                    <option value="G">G</option>
+                    <option value="G#">G#</option>
+                    <option value="Ab">Ab</option>
+                    <option value="A">A</option>
+                    <option value="A#">A#</option>
+                    <option value="Bb">Bb</option>
+                    <option value="B">B</option>
+                </select>
+                <p class="key__text"></p>
+            </div>
+            <div class="tabla__intervalos">
+                <button value="0" onclick="toggleIntervalo(this)" class="intervalos int_1 seleccionado">R</button>
+                <button value="1" onclick="toggleIntervalo(this)" class="intervalos int_2m">2m</button>
+                <button value="2" onclick="toggleIntervalo(this)" class="intervalos int_2M seleccionado">2M</button>
+                <button value="3" onclick="toggleIntervalo(this)" class="intervalos int_3m">3m</button>
+                <button value="4" onclick="toggleIntervalo(this)" class="intervalos int_3M seleccionado">3M</button>
+                <button value="5" onclick="toggleIntervalo(this)" class="intervalos int_4 seleccionado">4</button>
+                <button value="6" onclick="toggleIntervalo(this)" class="intervalos int_Tri">Tri</button>
+                <button value="7" onclick="toggleIntervalo(this)" class="intervalos int_5 seleccionado">5</button>
+                <button value="8" onclick="toggleIntervalo(this)" class="intervalos int_6m">6m</button>
+                <button value="9" onclick="toggleIntervalo(this)" class="intervalos int_6M seleccionado">6M</button>
+                <button value="10" onclick="toggleIntervalo(this)" class="intervalos int_7m">7m</button>
+                <button value="11" onclick="toggleIntervalo(this)" class="intervalos int_7M seleccionado">7M</button>
+                <button value="12" onclick="toggleIntervalo(this)" class="intervalos int_1 int_8 seleccionado">R</button>
+            </div>
+
+            <div class="tabla__notas">
+                <button class="boton seleccionado">C</button>
+                <button class="boton">C#</button>
+                <button class="boton seleccionado">D</button>
+                <button class="boton">D#</button>
+                <button class="boton seleccionado">E</button>
+                <button class="boton seleccionado">F</button>
+                <button class="boton">F#</button>
+                <button class="boton seleccionado">G</button>
+                <button class="boton">G#</button>
+                <button class="boton seleccionado">A</button>
+                <button class="boton">A#</button>
+                <button class="boton seleccionado">B</button>
+                <button class="boton seleccionado">C</button>
+            </div>
+            <div class="tabla__ColoresNotas">
+                <select disabled id = "colorInt1" name="colorInt1" class="int_1 color2 color seleccionado" onchange = "changeColor(this);" position="0"> 
+                    <option value="color1" class="color1"></option>
+                    <option selected value="color2" class="color2"></option>
+                    <option value="color3" class="color3"></option>
+                    <option value="color4" class="color4"></option>
+                </select>
+                <select disabled id = "colorInt2m" name="colorInt2m" class="int_2m color2 color" onchange = "changeColor(this);" position="1"> 
+                    <option value="color1" class="color1"></option>
+                    <option selected value="color2" class="color2"></option>
+                    <option value="color3" class="color3"></option>
+                    <option value="color4" class="color4"></option>
+                </select>
+                <select disabled id = "colorInt2M" name="colorInt2M" class="int_2M color2 color seleccionado" onchange = "changeColor(this);" position="2"> 
+                    <option value="color1" class="color1"></option>
+                    <option selected value="color2" class="color2"></option>
+                    <option value="color3" class="color3"></option>
+                    <option value="color4" class="color4"></option>
+                </select>
+                <select disabled id = "colorInt3m" name="colorInt3m" class="color2" onchange = "changeColor(this);" position="3"> 
+                    <option value="color1" class="color1"></option>
+                    <option selected value="color2" class="color2"></option>
+                    <option value="color3" class="color3"></option>
+                    <option value="color4" class="color4"></option>
+                </select>
+                <select disabled id = "colorInt3M" name="colorInt3M" class="color2 seleccionado" onmousedown="this.value = '';" onchange = "changeColor(this);" position="4"> 
+                    <option value="color1" class="color1"></option>
+                    <option selected value="color2" class="color2"></option>
+                    <option value="color3" class="color3"></option>
+                    <option value="color4" class="color4"></option>
+                </select>
+                <select disabled id = "colorInt4" name="colorInt4" class="color2 seleccionado" onmousedown="this.value = '';" onchange = "changeColor(this);" position="5"> 
+                    <option value="color1" class="color1"></option>
+                    <option selected value="color2" class="color2"></option>
+                    <option value="color3" class="color3"></option>
+                    <option value="color4" class="color4"></option>
+                </select>
+                <select disabled id = "colorIntTri" name="colorIntTri" class="color2" onmousedown="this.value = '';" onchange = "changeColor(this);" position="6"> 
+                    <option value="color1" class="color1"></option>
+                    <option selected value="color2" class="color2"></option>
+                    <option value="color3" class="color3"></option>
+                    <option value="color4" class="color4"></option>
+                </select>
+                <select disabled id = "colorInt5" name="colorInt5" class="color2 seleccionado" onmousedown="this.value = '';" onchange = "changeColor(this);" position="7"> 
+                    <option value="color1" class="color1"></option>
+                    <option selected value="color2" class="color2"></option>
+                    <option value="color3" class="color3"></option>
+                    <option value="color4" class="color4"></option>
+                </select>
+                <select disabled id = "colorInt6m" name="colorInt6m" class="color2" onmousedown="this.value = '';" onchange = "changeColor(this);" position="8"> 
+                    <option value="color1" class="color1"></option>
+                    <option selected value="color2" class="color2"></option>
+                    <option value="color3" class="color3"></option>
+                    <option value="color4" class="color4"></option>
+                </select>
+                <select disabled id = "colorInt6M" name="colorInt6M" class="color2 seleccionado" onmousedown="this.value = '';" onchange = "changeColor(this);" position="9"> 
+                    <option value="color1" class="color1"></option>
+                    <option selected value="color2" class="color2"></option>
+                    <option value="color3" class="color3"></option>
+                    <option value="color4" class="color4"></option>
+                </select>
+                <select disabled id = "colorInt7m" name="colorInt7m" class="color2" onmousedown="this.value = '';" onchange = "changeColor(this);" position="10"> 
+                    <option value="color1" class="color1"></option>
+                    <option selected value="color2" class="color2"></option>
+                    <option value="color3" class="color3"></option>
+                    <option value="color4" class="color4"></option>
+                
+                </select>
+                <select disabled id = "colorInt7M" name="colorInt7M" class="color2 seleccionado" onmousedown="this.value = '';" onchange = "changeColor(this);" position="11"> 
+                    <option value="color1" class="color1"></option>
+                    <option selected value="color2" class="color2"></option>
+                    <option value="color3" class="color3"></option>
+                    <option value="color4" class="color4"></option>
+                
+                </select>
+                <select disabled id = "colorInt8" name="colorInt1" class="color2" onmousedown="this.value = '';" style="display:none"> <!-- dummy, para simplicar el JS -->
+                    <option value="color1" class="color1"></option>
+                    <option selected value="color2" class="color2"></option>
+                    <option value="color3" class="color3"></option>
+                    <option value="color4" class="color4"></option>
+                </select>
+            </div>
+            <h3>Escala Relativa</h3>
+
+
+            <div class="escalaRelativa">
+                <div class="tabla__intervalos escalaRelativa">
+                    <button value="0" onclick="toggleIntervalo(this)" class="intervalos int_1 seleccionado">3m</button>
+                    <button value="1" onclick="toggleIntervalo(this)" class="intervalos int_2m">3M</button>
+                    <button value="2" onclick="toggleIntervalo(this)" class="intervalos int_2M seleccionado">4</button>
+                    <button value="3" onclick="toggleIntervalo(this)" class="intervalos int_3m">Tri</button>
+                    <button value="4" onclick="toggleIntervalo(this)" class="intervalos int_3M seleccionado">5</button>
+                    <button value="5" onclick="toggleIntervalo(this)" class="intervalos int_4 seleccionado">6m</button>
+                    <button value="6" onclick="toggleIntervalo(this)" class="intervalos int_Tri">6M</button>
+                    <button value="7" onclick="toggleIntervalo(this)" class="intervalos int_5 seleccionado">7m</button>
+                    <button value="8" onclick="toggleIntervalo(this)" class="intervalos int_6m">7M</button>
+                    <button value="9" onclick="toggleIntervalo(this)" class="intervalos int_6M seleccionado">r</button>
+                    <button value="10" onclick="toggleIntervalo(this)" class="intervalos int_7m">2m</button>
+                    <button value="11" onclick="toggleIntervalo(this)" class="intervalos int_7M seleccionado">2M</button>
+                    <button value="12" onclick="toggleIntervalo(this)" class="intervalos int_1 int_8 seleccionado">3m</button>
+                </div>
+            </div>
+            <div class="botones_reset">
+                <button id="botonColores" onclick="resetColors()" class="resetColors">Reset Colors</button>
+                <button id="botonNotes" onclick="update()" class="resetNotes">Reset Notes</button>
+            </div>
+        </div>
+
+
+        <div class="guitarra2">
+            <div class="cuerdasCuello">
+                <div class="cuerda"></div>
+                <div class="cuerda"></div>
+                <div class="cuerda"></div>
+                <div class="cuerda"></div>
+                <div class="cuerda"></div>
+                <div class="cuerda"></div>
+            </div>
+            <div class="cuello">
+                <div class="traste traste1">
+                    <div class="cuerda cuerdae cuerdae1"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerda cuerdaB cuerdaB1"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerda cuerdaG cuerdaG1"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                    <div class="cuerda cuerdaD cuerdaD1"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                    <div class="cuerda cuerdaA cuerdaA1"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerda cuerdaE cuerdaE1"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                </div>
+                <div class="traste traste2">
+                    <div class="cuerdae cuerdae2"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                    <div class="cuerdaB cuerdaB2"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                    <div class="cuerdaG cuerdaG2"><p class="nota nA">A</p></div>
+                    <div class="cuerdaD cuerdaD2"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                    <div class="cuerdaA cuerdaA2"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                    <div class="cuerdaE cuerdaE2"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                </div>
+                <div class="traste traste3">
+                    <div class="cuerdae cuerdae3"><p class="nota nG">G</p></div>
+                    <div class="cuerdaB cuerdaB3"><p class="nota nD">D</p></div>
+                    <div class="cuerdaG cuerdaG3"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerdaD cuerdaD3"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerdaA cuerdaA3"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerdaE cuerdaE3"><p class="nota nG">G</p></div>
+                </div>
+                <div class="traste traste4">
+                    <div class="cuerdae cuerdae4"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                    <div class="cuerdaB cuerdaB4"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                    <div class="cuerdaG cuerdaG4"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                    <div class="cuerdaD cuerdaD4"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                    <div class="cuerdaA cuerdaA4"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                    <div class="cuerdaE cuerdaE4"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                </div>
+                <div class="traste traste5">
+                    <div class="cuerdae cuerdae5"><p class="nota nA">A</p></div>
+                    <div class="cuerdaB cuerdaB5"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                    <div class="cuerdaG cuerdaG5"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerdaD cuerdaD5"><p class="nota nG">G</p></div>
+                    <div class="cuerdaA cuerdaA5"><p class="nota nD">D</p></div>
+                    <div class="cuerdaE cuerdaE5"><p class="nota nA">A</p></div>
+                </div>
+                <div class="traste traste6">
+                    <div class="cuerdae cuerdae6"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerdaB cuerdaB6"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerdaG cuerdaG6"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                    <div class="cuerdaD cuerdaD6"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                    <div class="cuerdaA cuerdaA6"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                    <div class="cuerdaE cuerdaE6"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                </div>
+                <div class="traste traste7">
+                    <div class="cuerdae cuerdae7"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                    <div class="cuerdaB cuerdaB7"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                    <div class="cuerdaG cuerdaG7"><p class="nota nD">D</p></div>
+                    <div class="cuerdaD cuerdaD7"><p class="nota nA">A</p></div>
+                    <div class="cuerdaA cuerdaA7"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                    <div class="cuerdaE cuerdaE7"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                </div>
+                <div class="traste traste8">
+                    <div class="cuerdae cuerdae8"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerdaB cuerdaB8"><p class="nota nG">G</p></div>
+                    <div class="cuerdaG cuerdaG8"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                    <div class="cuerdaD cuerdaD8"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerdaA cuerdaA8"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerdaE cuerdaE8"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                </div>
+                <div class="traste traste9">
+                    <div class="cuerdae cuerdae9"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                    <div class="cuerdaB cuerdaB9"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                    <div class="cuerdaG cuerdaG9"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                    <div class="cuerdaD cuerdaD9"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                    <div class="cuerdaA cuerdaA9"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                    <div class="cuerdaE cuerdaE9"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                </div>
+                <div class="traste traste10">
+                    <div class="cuerdae cuerdae10"><p class="nota nD">D</p></div>
+                    <div class="cuerdaB cuerdaB10"><p class="nota nA">A</p></div>
+                    <div class="cuerdaG cuerdaG10"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerdaD cuerdaD10"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerdaA cuerdaA10"><p class="nota nG">G</p></div>
+                    <div class="cuerdaE cuerdaE10"><p class="nota nD">D</p></div>
+                </div>
+                <div class="traste traste11">
+                    <div class="cuerdae cuerdae11"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                    <div class="cuerdaB cuerdaB11"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerdaG cuerdaG11"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                    <div class="cuerdaD cuerdaD11"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                    <div class="cuerdaA cuerdaA11"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                    <div class="cuerdaE cuerdaE11"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                </div>
+                <div class="traste traste12">
+                    <div class="cuerdae cuerdae12"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                    <div class="cuerdaB cuerdaB12"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                    <div class="cuerdaG cuerdaG12"><p class="nota nG">G</p></div>
+                    <div class="cuerdaD cuerdaD12"><p class="nota nD">D</p></div>
+                    <div class="cuerdaA cuerdaA12"><p class="nota nA">A</p></div>
+                    <div class="cuerdaE cuerdaE12"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                </div>
+                <div class="traste traste13">
+                    <div class="cuerdae cuerdae13"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerdaB cuerdaB13"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerdaG cuerdaG13"><p class="nota nGsharp nSharp">G#</p><p class="nota nAb nBemol">Ab</p></div>
+                    <div class="cuerdaD cuerdaD13"><p class="nota nDsharp nSharp">D#</p><p class="nota nEb nBemol">Eb</p></div>
+                    <div class="cuerdaA cuerdaA13"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerdaE cuerdaE13"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                </div>
+                <div class="traste traste14">
+                    <div class="cuerdae cuerdae14"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                    <div class="cuerdaB cuerdaB14"><p class="nota nCsharp nSharp">C#</p><p class="nota nDb nBemol">Db</p></div>
+                    <div class="cuerdaG cuerdaG14"><p class="nota nA">A</p></div>
+                    <div class="cuerdaD cuerdaD14"><p class="nota nE nSharp">E</p><p class="nota nFb nBemol">Fb</p></div>
+                    <div class="cuerdaA cuerdaA14"><p class="nota nB nSharp">B</p><p class="nota nCb nBemol">Cb</p></div>
+                    <div class="cuerdaE cuerdaE14"><p class="nota nFsharp nSharp">F#</p><p class="nota nGb nBemol">Gb</p></div>
+                </div>
+                <div class="traste traste15">
+                    <div class="cuerdae cuerdae15"><p class="nota nG">G</p></div>
+                    <div class="cuerdaB cuerdaB15"><p class="nota nD">D</p></div>
+                    <div class="cuerdaG cuerdaG15"><p class="nota nAsharp nSharp">A#</p><p class="nota nBb nBemol">Bb</p></div>
+                    <div class="cuerdaD cuerdaD15"><p class="nota nEsharp nSharp">E#</p><p class="nota nF nBemol">F</p></div>
+                    <div class="cuerdaA cuerdaA15"><p class="nota nBsharp nSharp">B#</p><p class="nota nC nBemol">C</p></div>
+                    <div class="cuerdaE cuerdaE15"><p class="nota nG">G</p></div>
+                </div>
+            </div>
+            <div class="notasCuerdas">
+                <div class="traste">
+                    <div class="open">e</div>
+                    <div class="open">B</div>
+                    <div class="open">G</div>
+                    <div class="open">D</div>
+                    <div class="open">A</div>
+                    <div class="open">E</div>
+                </div>
+            </div>
+            <div class="numerosTrastes">
+                <div class="numerosTrastes__traste"><p class="outNeck left"></p><p class="inNeck left"></p></div> <!-- 15 -->
+                <div class="numerosTrastes__traste"></div> <!-- 14 -->
+                <div class="numerosTrastes__traste"><p class="outNeck right hide"></p><p class="inNeck right hide"></p></div> <!-- 13 -->
+                <div class="numerosTrastes__traste traste12"><p class="outNeck left"></p><p class="outNeck left"></p><p class="inNeck left"></p><p class="inNeck left"></p></div> <!-- 12 -->
+                <div class="numerosTrastes__traste"><p class="outNeck right hide"></p><p class="inNeck right hide"></p></div> <!-- 11 -->
+                <div class="numerosTrastes__traste"></div> <!-- 10 -->
+                <div class="numerosTrastes__traste"><p class="outNeck"></p><p class="inNeck"></p></div> <!-- 9 -->
+                <div class="numerosTrastes__traste"></div> <!-- 8 -->
+                <div class="numerosTrastes__traste"><p class="outNeck"></p><p class="inNeck"></p></div> <!-- 7 -->
+                <div class="numerosTrastes__traste"></div> <!-- 6 -->
+                <div class="numerosTrastes__traste"><p class="outNeck"></p><p class="inNeck"></p></div> <!-- 5 -->
+                <div class="numerosTrastes__traste traste12right"><p class="outNeck right hide"></p><p class="outNeck right hide"></p><p class="inNeck right hide"></p><p class="inNeck right hide"></p></div> <!-- 4 -->
+                <div class="numerosTrastes__traste"><p class="outNeck left"></p><p class="inNeck left"></p></div> <!-- 3 -->
+                <div class="numerosTrastes__traste"></div> <!-- 2 -->
+                <div class="numerosTrastes__traste"><p class="outNeck right hide"></p><p class="inNeck right hide"></p></div> <!-- 1 -->
+
+
+
+            </div>
+        </div>
+    </main>
+    <div class="sideLeft">
+    </div>
+    <div class="sideRight">
+        <button id="botonDarkMode" onclick="darkMode()" class="darkMode">DarkMode </button>
+    </div>
+    <footer class="footer"></footer>
+
+</body>
+</html>

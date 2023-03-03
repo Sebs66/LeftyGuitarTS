@@ -1,0 +1,15 @@
+{
+  "name": "leftyguitar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "/build/index.js",
+  "scripts": {
+    "start:build": "tsc -w"
+  },
+  "author": "Sebs66",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "type":"module"
+}

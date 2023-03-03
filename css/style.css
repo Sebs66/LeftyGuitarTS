@@ -1,0 +1,656 @@
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  font-size: 100%;
+  vertical-align: baseline;
+  margin: 0px;
+  padding: 0px;
+  border-width: 0px;
+  border-style: initial;
+  border-color: initial;
+  -o-border-image: initial;
+     border-image: initial;
+}
+
+body {
+  font-family: sans-serif;
+  display: -ms-grid;
+  display: grid;
+  /* background-color: black; */
+  /* opacity:80%; */
+      grid-template-areas: "sideLeft header header sideRight"
+ "sideLeft principal principal sideRight"
+ "sideLeft principal principal sideRight"
+ "sideLeft principal principal sideRight"
+ "footer footer footer footer";
+  -ms-grid-columns: 1fr 5fr 5fr 1fr;
+      grid-template-columns: 1fr 5fr 5fr 1fr;
+}
+
+body .header {
+  grid-area: head / head / head / head;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 5;
+  grid-column: 1/6;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+  margin: auto;
+}
+
+body .header .titulo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 60px;
+}
+
+body .header .subtitulo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 40px;
+}
+
+body .sideLeft {
+  grid-area: sideLeft / sideLeft / sideLeft / sideLeft;
+}
+
+body .sideRight {
+  grid-area: sideRight / sideRight / sideRight / sideRight;
+}
+
+body .sideRight button.darkMode {
+  margin-top: 20px;
+}
+
+body .principal {
+  grid-area: principal / principal / principal / principal;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+body .principal .direccionGuitarra {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  position: relative;
+  top: 50px;
+}
+
+body .principal .direccionGuitarra button#leftGuitarra {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body .principal .direccionGuitarra button#leftGuitarra img {
+  height: 15px;
+}
+
+body .principal .guitarra, body .principal .guitarra2 {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 2;
+  grid-column: 2/4;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 30fr 1fr;
+      grid-template-columns: 30fr 1fr;
+  -ms-grid-rows: 1fr 5fr 1fr;
+      grid-template-rows: 1fr 5fr 1fr;
+  height: 500px;
+}
+
+body .principal .guitarra .cuello, body .principal .guitarra2 .cuello {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  height: 100%;
+  background-image: url(../images/background-guitar.svg);
+}
+
+body .principal .guitarra .cuello .traste0, body .principal .guitarra2 .cuello .traste0 {
+  position: relative;
+  z-index: 1;
+}
+
+body .principal .guitarra .cuello .traste, body .principal .guitarra2 .cuello .traste {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+  border-right: solid 5px white;
+}
+
+body .principal .guitarra .cuello .traste .nota, body .principal .guitarra2 .cuello .traste .nota {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #16ce53;
+  font-weight: bolder;
+  position: relative;
+  z-index: 2;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  opacity: 0%;
+}
+
+body .principal .guitarra .cuello .traste .nota:hover, body .principal .guitarra2 .cuello .traste .nota:hover {
+  opacity: 100%;
+}
+
+body .principal .guitarra .cuello .traste .nBemol, body .principal .guitarra2 .cuello .traste .nBemol {
+  position: relative;
+  bottom: 12.5px;
+}
+
+body .principal .guitarra .cuello .traste .nSharp, body .principal .guitarra2 .cuello .traste .nSharp {
+  position: relative;
+  top: 12.5px;
+}
+
+body .principal .guitarra .notasCuerdas, body .principal .guitarra2 .notasCuerdas {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  background-image: url(../images/background-guitar.svg);
+  width: 100%;
+}
+
+body .principal .guitarra .notasCuerdas .traste, body .principal .guitarra2 .notasCuerdas .traste {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+  border-right: solid 5px white;
+  height: 100%;
+}
+
+body .principal .guitarra .notasCuerdas .traste .open, body .principal .guitarra2 .notasCuerdas .traste .open {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+body .principal .guitarra .cuerdasCuello .cuerda, body .principal .guitarra2 .cuerdasCuello .cuerda {
+  width: 100%;
+  background-color: black;
+  height: 5%;
+  position: relative;
+}
+
+body .principal .guitarra .cuerdasCuello .cuerda:nth-child(1), body .principal .guitarra2 .cuerdasCuello .cuerda:nth-child(1) {
+  top: 137%;
+}
+
+body .principal .guitarra .cuerdasCuello .cuerda:nth-child(2), body .principal .guitarra2 .cuerdasCuello .cuerda:nth-child(2) {
+  top: 216%;
+}
+
+body .principal .guitarra .cuerdasCuello .cuerda:nth-child(3), body .principal .guitarra2 .cuerdasCuello .cuerda:nth-child(3) {
+  top: 294%;
+}
+
+body .principal .guitarra .cuerdasCuello .cuerda:nth-child(4), body .principal .guitarra2 .cuerdasCuello .cuerda:nth-child(4) {
+  top: 373%;
+  height: 5%;
+}
+
+body .principal .guitarra .cuerdasCuello .cuerda:nth-child(5), body .principal .guitarra2 .cuerdasCuello .cuerda:nth-child(5) {
+  top: 450%;
+  height: 7%;
+}
+
+body .principal .guitarra .cuerdasCuello .cuerda:nth-child(6), body .principal .guitarra2 .cuerdasCuello .cuerda:nth-child(6) {
+  top: 526%;
+  height: 10%;
+}
+
+body .principal .guitarra .numerosTrastes, body .principal .guitarra2 .numerosTrastes {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 1;
+  grid-row: 3/4;
+  background-color: #c77407;
+  height: 70%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  width: 100%;
+  justify-items: center;
+}
+
+body .principal .guitarra .numerosTrastes__traste p.outNeck, body .principal .guitarra .numerosTrastes__traste p.inNeck, body .principal .guitarra2 .numerosTrastes__traste p.outNeck, body .principal .guitarra2 .numerosTrastes__traste p.inNeck {
+  background-color: white;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  position: relative;
+  bottom: -25%;
+  right: 0%;
+  right: 12%;
+}
+
+body .principal .guitarra .numerosTrastes__traste p.inNeck, body .principal .guitarra2 .numerosTrastes__traste p.inNeck {
+  bottom: 255%;
+}
+
+body .principal .guitarra .numerosTrastes .traste12 .outNeck:nth-child(1), body .principal .guitarra2 .numerosTrastes .traste12 .outNeck:nth-child(1) {
+  top: 10%;
+}
+
+body .principal .guitarra .numerosTrastes .traste12 .outNeck:nth-child(2), body .principal .guitarra2 .numerosTrastes .traste12 .outNeck:nth-child(2) {
+  top: 15%;
+}
+
+body .principal .guitarra .numerosTrastes .traste12 .inNeck:nth-child(3), body .principal .guitarra2 .numerosTrastes .traste12 .inNeck:nth-child(3) {
+  bottom: 210%;
+}
+
+body .principal .guitarra .numerosTrastes .traste12 .inNeck:nth-child(4), body .principal .guitarra2 .numerosTrastes .traste12 .inNeck:nth-child(4) {
+  bottom: 380%;
+}
+
+body .principal .guitarra .numerosTrastes .traste12right .outNeck:nth-child(1), body .principal .guitarra2 .numerosTrastes .traste12right .outNeck:nth-child(1) {
+  top: 10%;
+}
+
+body .principal .guitarra .numerosTrastes .traste12right .outNeck:nth-child(2), body .principal .guitarra2 .numerosTrastes .traste12right .outNeck:nth-child(2) {
+  top: 15%;
+}
+
+body .principal .guitarra .numerosTrastes .traste12right .inNeck:nth-child(3), body .principal .guitarra2 .numerosTrastes .traste12right .inNeck:nth-child(3) {
+  bottom: 210%;
+}
+
+body .principal .guitarra .numerosTrastes .traste12right .inNeck:nth-child(4), body .principal .guitarra2 .numerosTrastes .traste12right .inNeck:nth-child(4) {
+  bottom: 380%;
+}
+
+body .principal .guitarra2 .cuello .traste .nota {
+  background-color: aqua;
+}
+
+body .principal .guitarra2 .cuello .traste .nota:hover {
+  opacity: 0%;
+}
+
+body .tabla {
+  margin-top: 20px;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2/3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: azure;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+body .tabla .escala, body .tabla .key {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-column-gap: 10px;
+          column-gap: 10px;
+}
+
+body .tabla__tonos {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  position: relative;
+  left: 30px;
+}
+
+body .tabla__tonos p {
+  font-weight: bolder;
+  font-size: 2rem;
+}
+
+body .tabla__tonos #tono1 {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-column: 1/3;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+}
+
+body .tabla__tonos .tono2Mayor {
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 2;
+  grid-column: 3/5;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+}
+
+body .tabla__tonos .tono2Menor {
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 2;
+  grid-column: 4/6;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+}
+
+body .tabla__tonos #tono3 {
+  -ms-grid-column: 6;
+  -ms-grid-column-span: 2;
+  grid-column: 6/8;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+}
+
+body .tabla__tonos .tono4Mayor {
+  -ms-grid-column: 8;
+  -ms-grid-column-span: 2;
+  grid-column: 8/10;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+}
+
+body .tabla__tonos .tono4Menor {
+  -ms-grid-column: 9;
+  -ms-grid-column-span: 2;
+  grid-column: 9/11;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+}
+
+body .tabla__tonos .tono5Mayor {
+  -ms-grid-column: 10;
+  -ms-grid-column-span: 2;
+  grid-column: 10/12;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+}
+
+body .tabla__tonos .tono5Menor {
+  -ms-grid-column: 11;
+  -ms-grid-column-span: 2;
+  grid-column: 11/13;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+}
+
+body .tabla__tonos .semiTono1Mayor {
+  -ms-grid-column: 5;
+  -ms-grid-column-span: 1;
+  grid-column: 5/6;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+}
+
+body .tabla__tonos .semiTono1Menor {
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 1;
+  grid-column: 3/4;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+}
+
+body .tabla__tonos .semiTono2Mayor {
+  -ms-grid-column: 12;
+  -ms-grid-column-span: 1;
+  grid-column: 12/13;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+}
+
+body .tabla__tonos .semiTono2Menor {
+  -ms-grid-column: 8;
+  -ms-grid-column-span: 1;
+  grid-column: 8/9;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1/2;
+}
+
+body .tabla__notas {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+}
+
+body .tabla__notas .boton {
+  width: 60px;
+  border-radius: 20%;
+  height: 50px;
+  background-color: #16ce53;
+  font-weight: bolder;
+  font-size: 2rem;
+  opacity: 0%;
+}
+
+body .tabla__intervalos {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+}
+
+body .tabla__intervalos .intervalos {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-weight: bolder;
+  background-color: #16ce53;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  opacity: 10%;
+}
+
+body .tabla__intervalos .intervalos:hover {
+  opacity: 30%;
+  cursor: pointer;
+}
+
+body .tabla__ColoresNotas {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  justify-items: center;
+}
+
+body .tabla__ColoresNotas select {
+  border-radius: 50%;
+  width: 20px;
+  opacity: 0%;
+  position: relative;
+  z-index: 1;
+  bottom: 15px;
+  left: 20px;
+}
+
+body .tabla .escalaRelativa {
+  margin-top: 5px;
+}
+
+body .tabla .escalaRelativa button {
+  background-color: #fa7979 !important;
+}
+
+body .tabla .botones_reset {
+  margin-top: 20px;
+}
+
+body .tabla h3 {
+  margin-top: 20px;
+}
+
+.seleccionado {
+  opacity: 100% !important;
+}
+
+.hide {
+  opacity: 0%;
+}
+
+.color1 {
+  background-color: aqua !important;
+}
+
+.color2 {
+  background-color: #16ce53 !important;
+}
+
+.color3 {
+  background-color: #2583ff !important;
+}
+
+.color4 {
+  background-color: #fc10f0 !important;
+}
+
+.bodyDarkMode {
+  background-color: black;
+  opacity: 80%;
+}
+
+.textColor {
+  color: white;
+}
+
+.guitarraDerecha {
+  -ms-grid-columns: 1fr 30fr !important;
+      grid-template-columns: 1fr 30fr !important;
+}
+
+.notasCuerdasDerecha {
+  -ms-grid-column: 1 !important;
+  -ms-grid-column-span: 1 !important;
+  grid-column: 1/2 !important;
+  -ms-grid-column-align: end;
+      justify-self: end;
+}
+
+.numerosTrasteDerecha {
+  -ms-grid-column: 3 !important;
+  -ms-grid-column-span: -1 !important;
+  grid-column: 3/2 !important;
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: reverse !important;
+      -ms-flex-direction: row-reverse !important;
+          flex-direction: row-reverse !important;
+}
+
+.cuelloDerecha {
+  -ms-grid-column: 3 !important;
+  -ms-grid-column-span: -1 !important;
+  grid-column: 3/2 !important;
+  -webkit-box-orient: horizontal !important;
+  -webkit-box-direction: normal !important;
+      -ms-flex-direction: row !important;
+          flex-direction: row !important;
+}
+
+.cuerdasCuelloDerecha {
+  -ms-grid-column: 3 !important;
+  -ms-grid-column-span: -1 !important;
+  grid-column: 3/2 !important;
+}
+
+.botonSeleccionado {
+  background-color: #16ce53;
+  opacity: 100%;
+}
+
+.openNota {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #16ce53;
+  font-weight: bolder;
+  position: relative;
+  z-index: 2;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+}
