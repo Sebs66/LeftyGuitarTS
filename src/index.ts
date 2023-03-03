@@ -1,5 +1,5 @@
 import { Scale } from './Scale.js'
-import { GuitarString } from './Guitar.js'
+import { Guitar, GuitarString } from './Guitar.js'
 
 function update():void{
     const rootNoteSelect = document.getElementById('rootNote') as HTMLSelectElement;
@@ -19,6 +19,7 @@ const tonesElements = Array.from(document.getElementsByClassName('tabla__tonos')
 
 /**
  * Change the scale tones layout depending on the type of scale. 
+ * @param color
  */
 function setScaleTones(color:string):void {
     if (color === 'pentatonicMinor'){
@@ -140,6 +141,8 @@ function resetColors(){
 update()
 
 const scale = new Scale('A','major');
-const stringA = new GuitarString('E',scale);
-console.log(stringA.getIndexes('A'));
-console.log(stringA.getAt(5))
+const standarTunning = ['E','A','D','G','B','E'];
+
+const guitar1 = new Guitar(scale,standarTunning)
+console.log(guitar1.getAt(5));
+console.log(guitar1.getIndexes('C'));
