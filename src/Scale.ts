@@ -15,7 +15,7 @@ export class Scale{
         } if (color === 'pentatonicMinor'){
             cromatic = 'minor'
         }
-        this.scaleCromatic = scalesCromatic[cromatic][note]
+        this.scaleCromatic = scalesCromatic[cromatic][note.toLowerCase()]
         this.scaleIntervals = scaleIntervals[color]
     }
 }

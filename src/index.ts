@@ -1,4 +1,5 @@
-import {Scale} from './Scale.js'
+import { Scale } from './Scale.js'
+import { GuitarString } from './Guitar.js'
 
 function update():void{
     const rootNoteSelect = document.getElementById('rootNote') as HTMLSelectElement;
@@ -137,3 +138,8 @@ function resetColors(){
 (window as any).changeColor = changeColor;
 (window as any).resetColors = resetColors;
 update()
+
+const scale = new Scale('A','major');
+const stringA = new GuitarString('E',scale);
+console.log(stringA.getIndexes('A'));
+console.log(stringA.getAt(5))

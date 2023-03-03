@@ -1,4 +1,5 @@
 import { Scale } from './Scale.js';
+import { GuitarString } from './Guitar.js';
 function update() {
     const rootNoteSelect = document.getElementById('rootNote');
     const rootNote = rootNoteSelect.value.toLowerCase().replace('#', 'sharp');
@@ -128,3 +129,7 @@ window.update = update; /// Con esta línea hacemos que la función sea accesibl
 window.changeColor = changeColor;
 window.resetColors = resetColors;
 update();
+const scale = new Scale('A', 'major');
+const stringA = new GuitarString('E', scale);
+console.log(stringA.getIndexes('A'));
+console.log(stringA.getAt(5));
