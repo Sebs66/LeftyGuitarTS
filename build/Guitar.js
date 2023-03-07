@@ -30,7 +30,7 @@ export class Guitar {
 }
 export class GuitarString {
     constructor(rootNote, scale) {
-        console.log(rootNote);
+        //console.log(rootNote)
         this.rootNote = rootNote;
         const indexOfRoot = scale.scaleCromatic.indexOf(rootNote);
         const notes = [...scale.scaleCromatic.slice(indexOfRoot), ...scale.scaleCromatic.slice(1, indexOfRoot)]; /// Rearranging the notes in the guitarString order.

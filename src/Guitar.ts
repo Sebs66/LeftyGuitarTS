@@ -2,7 +2,7 @@ import { Scale } from "./Scale.js";
 
 export class Guitar {
     /// A guitar contains 22 frets.
-    string1 : GuitarString; /// lowest (hiest pitch) string. In standard tunning will be E.
+    string1 : GuitarString; /// lowest (highest pitch) string. In standard tunning will be E.
     string2 : GuitarString;
     string3 : GuitarString;
     string4 : GuitarString;
@@ -44,7 +44,7 @@ export class GuitarString {
     rootNote : string;
     notes : string[];
     constructor(rootNote:string, scale:Scale){
-        console.log(rootNote)
+        //console.log(rootNote)
         this.rootNote = rootNote;
         const indexOfRoot = scale.scaleCromatic.indexOf(rootNote)
         const notes = [...scale.scaleCromatic.slice(indexOfRoot),...scale.scaleCromatic.slice(1,indexOfRoot)] /// Rearranging the notes in the guitarString order.

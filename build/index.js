@@ -1,5 +1,10 @@
 import { Scale } from './Scale.js';
 import { Guitar } from './Guitar.js';
+import { Table } from './Table.js';
+import { GuitarHTML } from './GuitarComponent.js';
+const guitarra1 = new GuitarHTML('guitarra1');
+const table = new Table('tabla');
+const guitarra2 = new GuitarHTML('guitarra2');
 function update() {
     const rootNoteSelect = document.getElementById('rootNote');
     const rootNote = rootNoteSelect.value.toLowerCase().replace('#', 'sharp');
@@ -19,6 +24,7 @@ const tonesElements = Array.from(document.getElementsByClassName('tabla__tonos')
  * @param color
  */
 function setScaleTones(color) {
+    //console.log(`setScaleTones(color:${color})`)
     if (color === 'pentatonicMinor') {
         color = 'minor';
     }
@@ -26,11 +32,11 @@ function setScaleTones(color) {
         color = 'major';
     }
     const intervalos = ['tono2', 'tono4', 'tono5', 'semiTono1', 'semiTono2']; /// Only these are relevants.
+    color = color == 'major' ? 'Mayor' : 'Menor';
     tonesElements.forEach(tone => {
         tone.setAttribute('class', ''); /// Erase all clases.
         if (intervalos.indexOf(tone.id) !== -1) {
-            color = color == 'major' ? 'Mayor' : 'Menor';
-            //console.log(color)
+            //console.log(`tone class: ${tone.id}${color}`)
             tone.setAttribute('class', `${tone.id}${color}`);
         }
     });
@@ -41,8 +47,7 @@ function setScaleTones(color) {
  *
  */
 function setScale(nota, color) {
-    //console.log(nota,color)
-    //console.log(color)
+    //console.log(`setScale(nota:${nota},color:${color})`)
     const className = 'seleccionado';
     const scale = new Scale(nota, color);
     // primero apagar todos los botones.

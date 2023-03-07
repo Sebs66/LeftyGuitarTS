@@ -320,7 +320,7 @@ body .principal .guitarra2 .cuello .traste .nota:hover {
   opacity: 0%;
 }
 
-body .tabla {
+body #tabla {
   margin-top: 20px;
   -ms-grid-column: 2;
   -ms-grid-column-span: 1;
@@ -343,7 +343,7 @@ body .tabla {
           align-items: stretch;
 }
 
-body .tabla .escala, body .tabla .key {
+body #tabla .escala, body #tabla .key {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -543,19 +543,19 @@ body .tabla__ColoresNotas select {
   left: 20px;
 }
 
-body .tabla .escalaRelativa {
+body #tabla .escalaRelativa {
   margin-top: 5px;
 }
 
-body .tabla .escalaRelativa button {
+body #tabla .escalaRelativa button {
   background-color: #fa7979 !important;
 }
 
-body .tabla .botones_reset {
+body #tabla .botones_reset {
   margin-top: 20px;
 }
 
-body .tabla h3 {
+body #tabla h3 {
   margin-top: 20px;
 }
 
