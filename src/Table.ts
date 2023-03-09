@@ -2,38 +2,30 @@ import { scalesCromatic,intervalsText,relativeIntervalsText } from "./diccionari
 
 
 export class Table {
-    scaleDiv;
-    tonesDiv;
-    keyDiv;
-    intervalsDiv;
-    notesDiv;
-    colorsDiv;
-    relativeScaleDiv;
-    resetDiv;
+    scaleDiv: ScaleDiv;
+    tonesDiv: TonesDiv;
+    keyDiv: KeyDiv;
+    intervalsDiv: IntervalsDiv;
+    notesDiv: NotesDiv;
+    colorsDiv: ColorsDiv;
+    relativeScaleDiv: RelativeScaleDiv;
+    resetDiv: ResetDiv;
     constructor(id:string){
         const divTable = document.getElementById(id) as HTMLDivElement;
         const h3_1 = document.createElement('h3');
         h3_1.innerText = 'Escala';
         divTable.appendChild(h3_1);
-        const scaleDiv = new ScaleDiv(divTable);
-        this.scaleDiv = scaleDiv;
-        const tonesDiv = new TonesDiv(divTable);
-        this.tonesDiv = tonesDiv;
-        const keyDiv = new KeyDiv(divTable);
-        this.keyDiv = keyDiv;
-        const intervalsDiv = new IntervalsDiv(divTable);
-        this.intervalsDiv = intervalsDiv;
-        const notesDiv = new NotesDiv(divTable);
-        this.notesDiv = notesDiv;
-        const colorsDiv = new ColorsDiv(divTable);
-        this.colorsDiv = colorsDiv
+        this.scaleDiv = new ScaleDiv(divTable);
+        this.tonesDiv = new TonesDiv(divTable);
+        this.keyDiv = new KeyDiv(divTable);
+        this.intervalsDiv = new IntervalsDiv(divTable);
+        this.notesDiv = new NotesDiv(divTable);
+        this.colorsDiv = new ColorsDiv(divTable);
         const h3_2 = document.createElement('h3');
         h3_2.innerText = 'Intervalos escala relativa:';
         divTable.appendChild(h3_2);
-        const relativeScaleDiv = new RelativeScaleDiv(divTable);
-        this.relativeScaleDiv = relativeScaleDiv
-        const resetDiv = new ResetDiv(divTable);
-        this.resetDiv = resetDiv;
+        this.relativeScaleDiv = new RelativeScaleDiv(divTable);
+        this.resetDiv = new ResetDiv(divTable);
     }
 }
 
