@@ -54,3 +54,4 @@ export const activeNotes = {
 };
 export const intervalsText = ['R', '2m', '2M', '3m', '3M', '4', 'Tri', '5', '6m', '6M', '7m', '7M', 'R'];
 export const relativeIntervalsText = ['3m', '3M', '4', 'Tri', '5', '6m', '6M', '7m', '7M', 'r', '2m', '2M', '3m'];
+export const colorsNotes = ['color2', 'color2', 'color2', 'color2', 'color2', 'color2', 'color2', 'color2', 'color2', 'color2', 'color2', 'color2', 'color2'];

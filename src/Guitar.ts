@@ -1,4 +1,4 @@
-import { Scale } from "./Scale.js";
+import { Scale } from "./models/Scale.js";
 
 export class Guitar {
     /// A guitar contains 22 frets.

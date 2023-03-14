@@ -4,12 +4,14 @@
   "description": "",
   "main": "/build/index.js",
   "scripts": {
-    "start:build": "tsc -w"
+    "start:build": "tsc -w",
+    "start:server": "npx parcel index.html",
+    "start" : "concurrently npm:start:*"
   },
   "author": "Sebs66",
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "concurrently": "^7.6.0"
   },
-  "type":"module"
+  "type": "module"
 }
