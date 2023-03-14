@@ -6,19 +6,19 @@ const guitarra2 = new GuitarHTML('guitarra2');
 const buttonsNotes = Array.from(document.getElementsByClassName('boton'));
 const buttonsInterval = Array.from(document.querySelectorAll('.tabla__intervalos')[0].children);
 const colorsInterval = Array.from(document.getElementsByClassName('tabla__ColoresNotas')[0].children);
-/**
- * change the color of the specific botton and its relatives in the scale.
- * @param select
- */
-function changeColor(select) {
-    const index = Number(select.getAttribute('position'));
-    const color = select.value;
-    buttonsNotes[index].setAttribute('class', 'boton seleccionado'); // removes previous color class.
-    buttonsNotes[index].classList.add(color);
-    select.setAttribute('class', `seleccionado ${color}`);
-    buttonsInterval[index].setAttribute('class', 'intervalos seleccionado');
-    buttonsInterval[index].classList.add(color);
-}
+// /**
+//  * change the color of the specific botton and its relatives in the scale.
+//  * @param select 
+//  */
+// function changeColor(select:HTMLSelectElement):void {
+//     const index = Number(select.getAttribute('position'));
+//     const color = select.value;
+//     buttonsNotes[index].setAttribute('class','boton seleccionado') // removes previous color class.
+//     buttonsNotes[index].classList.add(color);
+//     select.setAttribute('class',`seleccionado ${color}`);
+//     buttonsInterval[index].setAttribute('class','intervalos seleccionado');
+//     buttonsInterval[index].classList.add(color);
+// }
 /**
  * reset the colors of all buttons to its default.
  */
@@ -39,5 +39,4 @@ function resetColors() {
         }
     });
 }
-window.changeColor = changeColor;
 window.resetColors = resetColors;

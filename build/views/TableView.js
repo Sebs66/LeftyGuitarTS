@@ -1,5 +1,5 @@
 import { scalesCromatic, intervalsText, relativeIntervalsText } from "../models/diccionarioNotas.js";
-import { HtmlConstructor } from "./HtmlConstructor.js";
+import { HtmlConstructor, HTMLSelectionConstructor } from "./HtmlConstructor.js";
 import { Scale } from "../models/Scale.js";
 export class Table extends HtmlConstructor {
     constructor(id) {
@@ -10,10 +10,10 @@ export class Table extends HtmlConstructor {
         super(root);
         this.id = id;
         this.onSetScale = () => {
-            const color = this.scaleDiv.getValue();
+            const scaleColor = this.scaleDiv.getValue();
             const note = this.keyDiv.getValue();
             //* Creamos una nueva escala y rendereamos la table de nuevo.
-            const scale = new Scale(note, color);
+            const scale = new Scale(note, scaleColor);
             this.render(scale);
         };
         this.root = root;
@@ -38,8 +38,18 @@ export class Table extends HtmlConstructor {
             /// Tiene que ser un evento que exista si es aplicado a un dom.
             'change:select#escala': this.onSetScale,
             'change:select#rootNote': this.onSetScale,
-            'click:button.intervalos': this.onClickButton.bind(this), /// Tenemos acceso tanto a la instancia como al target del evento!
+            'click:button.intervalos': this.onClickButton.bind(this),
+            'change:.tabla__ColoresNotas select': this.onSetColor.bind(this)
         };
+    }
+    onSetColor(event) {
+        const target = event.target;
+        const colorClass = target.selectedOptions[0].value;
+        const index = Number(target.getAttribute('position'));
+        this.notesDiv.changeColor(target, colorClass); /// ScaleColor element.
+        this.relativeScaleDiv.changeColor(this.relativeScaleDiv.elements[index], colorClass);
+        this.notesDiv.changeColor(this.notesDiv.elements[index], colorClass);
+        this.intervalsDiv.changeColor(this.intervalsDiv.elements[index], colorClass);
     }
     onClickButton(event) {
         const target = event.target;
@@ -48,10 +58,17 @@ export class Table extends HtmlConstructor {
         if (!index) {
             throw new Error('dataset.value of target element is undefined');
         }
-        this.toggleElement(this.notesDiv.notesElements[index]);
-        this.toggleElement(this.intervalsDiv.intervals[index]);
-        this.toggleElement(this.relativeScaleDiv.elements[index]);
-        this.toggleElement(this.colorsDiv.colorsElements[index]);
+        this.notesDiv.toggleElement(this.notesDiv.elements[index]);
+        this.intervalsDiv.toggleElement(this.intervalsDiv.elements[index]);
+        this.relativeScaleDiv.toggleElement(this.relativeScaleDiv.elements[index]);
+        this.colorsDiv.toggleElement(this.colorsDiv.elements[index]);
+        const colorElement = this.colorsDiv.elements[index];
+        if (colorElement.disabled) {
+            colorElement.disabled = false;
+        }
+        else {
+            colorElement.disabled = true;
+        }
     }
     bindEvents() {
         const eventsMap = this.eventsMap();
@@ -134,58 +151,64 @@ class KeyDiv extends HtmlConstructor {
         return this.select.value;
     }
 }
-class IntervalsDiv extends HtmlConstructor {
+class IntervalsDiv extends HTMLSelectionConstructor {
     constructor(parent) {
         super(parent);
         this.intervalsParent = this.addElement('div', { class: 'tabla__intervalos' });
         for (let i = 0; i < 13; i++) {
             const button = this.addSubElement(this.intervalsParent, 'button', { 'data-value': String(i), class: 'intervalos', innerText: intervalsText[i] });
         }
-        this.intervals = Array.from(this.intervalsParent.children);
+        this.elements = Array.from(this.intervalsParent.children);
     }
     update(scale) {
-        this.updateSelected(this.intervals, scale.activeNotes);
+        this.updateSelected(this.elements, scale.activeNotes);
     }
 }
-class NotesDiv extends HtmlConstructor {
+class NotesDiv extends HTMLSelectionConstructor {
     constructor(parent) {
         super(parent);
         this.notesParent = this.addElement('div', { class: 'tabla__notas' });
         for (let i = 0; i < 13; i++) {
             const button = this.addSubElement(this.notesParent, 'button', { class: 'boton', innerText: scalesCromatic['major']['c'][i] });
         }
-        this.notesElements = Array.from(this.notesParent.children);
+        this.elements = Array.from(this.notesParent.children);
     }
     update(scale) {
         const selected = 'seleccionado';
-        this.updateSelected(this.notesElements, scale.activeNotes);
-        this.notesElements.forEach((element, index) => {
+        this.updateSelected(this.elements, scale.activeNotes);
+        this.elements.forEach((element, index) => {
             element.textContent = scale.scaleCromatic[index];
         });
     }
 }
-class ColorsDiv extends HtmlConstructor {
+class ColorsDiv extends HTMLSelectionConstructor {
     constructor(parent) {
         super(parent);
         const colorsParent = this.addElement('div', { class: 'tabla__ColoresNotas' });
         for (let i = 0; i < 13; i++) {
-            const select = this.addSubElement(colorsParent, 'select', { position: String(i), onchange: 'changeColor(this);' });
+            const select = this.addSubElement(colorsParent, 'select', { position: String(i) });
             select.disabled = true;
+            select.classList.add('color2');
             for (let i = 0; i < 4; i++) {
                 const option = this.addSubElement(select, 'option', { value: `color${i + 1}`, class: `color${i + 1}` });
-                if (i == 1) {
-                    option.selected = true;
-                }
             }
             colorsParent.appendChild(select);
         }
-        this.colorsElements = Array.from(colorsParent.children);
+        this.elements = Array.from(colorsParent.children);
     }
     update(scale) {
-        this.updateSelected(this.colorsElements, scale.activeNotes);
+        this.updateSelected(this.elements, scale.activeNotes);
+        this.elements.forEach((element, index) => {
+            if (scale.activeNotes[index]) {
+                element.disabled = false;
+            }
+            else {
+                element.disabled = true;
+            }
+        });
     }
 }
-class RelativeScaleDiv extends HtmlConstructor {
+class RelativeScaleDiv extends HTMLSelectionConstructor {
     constructor(parent) {
         super(parent);
         this.relativeScaleParent = this.addElement('div', { class: 'tabla__intervalos escalaRelativa' });
