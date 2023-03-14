@@ -58,20 +58,15 @@ export class HTMLSelectionConstructor extends HtmlConstructor {
         });
         element.classList.add(colorClass)
     }
+
+    resetColors(elementArray:Element[],colorClass:string): void{
+        elementArray.forEach(element=>{
+            element.classList.forEach(className=>{
+                if (className.includes('color')){
+                    element.classList.remove(className)
+                }  
+            });
+            element.classList.add(colorClass) 
+        })
+    }
 } 
-
-/*
-
- * change the color of the specific botton and its relatives in the scale.
- * @param select 
-
-function changeColor(select:HTMLSelectElement):void {
-    const index = Number(select.getAttribute('position'));
-    const color = select.value;
-    buttonsNotes[index].setAttribute('class','boton seleccionado') // removes previous color class.
-    buttonsNotes[index].classList.add(color);
-    select.setAttribute('class',`seleccionado ${color}`);
-    buttonsInterval[index].setAttribute('class','intervalos seleccionado');
-    buttonsInterval[index].classList.add(color);
-}
-*/

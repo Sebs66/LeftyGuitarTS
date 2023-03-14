@@ -3,7 +3,6 @@ import { HtmlConstructor, HTMLSelectionConstructor } from "./HtmlConstructor.js"
 import { Scale } from "../models/Scale.js";
 
 export class Table extends HtmlConstructor {
-
     private scaleDiv: ScaleDiv;
     private tonesDiv: TonesDiv;
     private keyDiv: KeyDiv;
@@ -41,23 +40,32 @@ export class Table extends HtmlConstructor {
             'change:select#escala': this.onSetScale,
             'change:select#rootNote': this.onSetScale,
             'click:button.intervalos': this.onClickButton.bind(this), /// Tenemos acceso tanto a la instancia como al target del evento!
-            'change:.tabla__ColoresNotas select': this.onSetColor.bind(this)
+            'change:.tabla__ColoresNotas select': this.onSetColor.bind(this),
+            'click:button#botonColores': this.onResetColors,
+            'click:button#botonNotes': this.render,
         }
     }
 
+    onResetColors = ()=>{ /// Arrow function so we can access to the instance of the class with the this keyword.
+        this.notesDiv.resetColors(this.notesDiv.elements,'color1');
+        this.colorsDiv.resetColors(this.colorsDiv.elements,'color1')
+        this.intervalsDiv.resetColors(this.intervalsDiv.elements,'color1')
+
+    }
+    
     onSetColor(event:Event){
         const target =  event.target as HTMLSelectElement
         const colorClass = target.selectedOptions[0].value;
         const index = Number(target.getAttribute('position'));
-        this.notesDiv.changeColor(target,colorClass); /// ScaleColor element.
-        this.relativeScaleDiv.changeColor(this.relativeScaleDiv.elements[index] as HTMLElement,colorClass);
+        this.colorsDiv.changeColor(target,colorClass); /// ScaleColor element.
+        //this.relativeScaleDiv.changeColor(this.relativeScaleDiv.elements[index] as HTMLElement,colorClass); /// We dont change the relative scales colors.
         this.notesDiv.changeColor(this.notesDiv.elements[index] as HTMLElement,colorClass); 
         this.intervalsDiv.changeColor(this.intervalsDiv.elements[index] as HTMLElement,colorClass); 
     }
 
     onClickButton(event:Event){
         const target = event.target as HTMLButtonElement
-        console.log(target.dataset.value)
+        //console.log(target.dataset.value)
         const index = Number(target.dataset.value);
         if (!index){
             throw new Error('dataset.value of target element is undefined')
@@ -75,11 +83,7 @@ export class Table extends HtmlConstructor {
     }
 
     onSetScale = () => {
-        const scaleColor = this.scaleDiv.getValue();
-        const note = this.keyDiv.getValue();
-        //* Creamos una nueva escala y rendereamos la table de nuevo.
-        const scale = new Scale(note,scaleColor);
-        this.render(scale)
+        this.render()
     }
 
     bindEvents(): void {
@@ -92,7 +96,10 @@ export class Table extends HtmlConstructor {
         }
     }
 
-    render(scale:Scale){
+    render= ()=>{
+        const scaleColor = this.scaleDiv.getValue();
+        const note = this.keyDiv.getValue(); 
+        const scale = new Scale(note,scaleColor)
         this.tonesDiv.update(scale.color); /// Change positions of the tones in tonesDiv.
         this.intervalsDiv.update(scale);
         this.notesDiv.update(scale);
@@ -165,7 +172,7 @@ class KeyDiv extends HtmlConstructor {
     constructor(parent:HTMLElement){
         super(parent)
         const keyDiv = this.addElement('div',{class:'key'}) 
-        this.select = this.addSubElement(keyDiv,'select',{id:'rootNote',onchange:'update();'}) as HTMLSelectElement;
+        this.select = this.addSubElement(keyDiv,'select',{id:'rootNote'}) as HTMLSelectElement;
         for (let i = 0;i<cromaticNotes.length;i++){
             const option = this.addSubElement(this.select,'option',{value:cromaticNotes[i],innerText:cromaticNotes[i]})
         }
@@ -182,9 +189,10 @@ class IntervalsDiv extends HTMLSelectionConstructor {
     elements;
     constructor(parent:HTMLDivElement){
         super(parent)
+        const colorClass = 'color1'
         this.intervalsParent = this.addElement('div',{class:'tabla__intervalos'});
         for (let i = 0;i <13;i++){
-            const button = this.addSubElement(this.intervalsParent,'button',{'data-value':String(i),class:'intervalos',innerText:intervalsText[i]});
+            const button = this.addSubElement(this.intervalsParent,'button',{'data-value':String(i),class:`intervalos ${colorClass}`,innerText:intervalsText[i]});
         }
         this.elements =  Array.from(this.intervalsParent.children);
     }
@@ -223,7 +231,7 @@ class ColorsDiv extends HTMLSelectionConstructor {
         for (let i = 0; i<13; i++){
             const select = this.addSubElement(colorsParent,'select',{position:String(i)}) as HTMLSelectElement;
             select.disabled = true;
-            select.classList.add('color2')
+            select.classList.add('color1')
             for (let i = 0; i<4; i++){
                 const option = this.addSubElement(select,'option',{value:`color${i+1}`,class:`color${i+1}`}) as HTMLOptionElement;
             }
@@ -266,8 +274,8 @@ class ResetDiv extends HtmlConstructor {
     constructor(parent:HTMLDivElement){
         super(parent);
         const resetDiv = this.addElement('div',{class:'botones_reset'});
-        const button1 = this.addSubElement(resetDiv,'button',{id:'botonColores',onclick:'resetColors()',innerText:'Reset Colors',class:'resetColors'});
-        const button2 = this.addSubElement(resetDiv,'button',{id:'botonNotes',onclick:'update()',innerText:'Reset Notes',class:'resetNotes'});
+        const button1 = this.addSubElement(resetDiv,'button',{id:'botonColores',innerText:'Reset Colors',class:'resetColors'});
+        const button2 = this.addSubElement(resetDiv,'button',{id:'botonNotes',innerText:'Reset Notes',class:'resetNotes'});
     }
 }
 

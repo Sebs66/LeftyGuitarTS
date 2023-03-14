@@ -548,7 +548,7 @@ body #tabla .escalaRelativa {
 }
 
 body #tabla .escalaRelativa button {
-  background-color: #fa7979 !important;
+  background-color: #fa7979 ;
 }
 
 body #tabla .botones_reset {
@@ -567,11 +567,11 @@ body #tabla h3 {
   opacity: 0%;
 }
 
-.color1 {
+.color2 {
   background-color: aqua !important;
 }
 
-.color2 {
+.color1 {
   background-color: #16ce53 !important;
 }
 
@@ -581,6 +581,10 @@ body #tabla h3 {
 
 .color4 {
   background-color: #fc10f0 !important;
+}
+
+.color5 {
+  background-color: #fa7979 !important;
 }
 
 .bodyDarkMode {
