@@ -1,31 +1,45 @@
-import { scaleIntervals, scalesCromatic, activeNotes } from "./diccionarioNotas.js";
+import { scalesCromatic, activeNotes } from "../utils/KeySignatures.js";
 import { Eventing } from "./Eventing.js";
 import { Model } from "./Model.js";
 export class Scale extends Model {
-    constructor(note, color) {
+    constructor(root, scaleColor) {
         const events = new Eventing(); //* Hardcoded.
         super(events);
-        this.root = note.toLowerCase().replace('#', 'sharp');
-        let cromatic = color;
-        this.color = color;
-        if (color === 'pentatonicMajor') {
+        this.root = root;
+        this.scaleColor = scaleColor;
+        this.root = this.root.toLowerCase().replace('#', 'sharp');
+        let cromatic = scaleColor;
+        if (scaleColor === 'pentatonicMajor') {
             cromatic = 'major';
         }
-        else if (color === 'pentatonicMinor') {
+        else if (scaleColor === 'pentatonicMinor') {
             cromatic = 'minor';
         }
         this.scaleCromatic = scalesCromatic[cromatic][this.root];
-        this.scaleIntervals = scaleIntervals[color];
-        this.activeNotes = activeNotes[color]; /// Solo debemos preocuparnos en activar/desactivar acá.
+        this.activeNotes = activeNotes[scaleColor]; /// Solo debemos preocuparnos en activar/desactivar acá.
     }
     toggleNote(index) {
         this.activeNotes[index] = this.activeNotes[index] ? false : true;
-        this.trigger('change');
+        this.trigger('toggleNote');
     }
     getAll() {
         return this.activeNotes;
     }
     get(index) {
         return this.activeNotes[index];
+    }
+    changeScale(note, scaleColor) {
+        this.root = note.toLowerCase().replace('#', 'sharp');
+        this.scaleColor = scaleColor;
+        let cromatic = scaleColor;
+        if (scaleColor === 'pentatonicMajor') {
+            cromatic = 'major';
+        }
+        else if (scaleColor === 'pentatonicMinor') {
+            cromatic = 'minor';
+        }
+        this.scaleCromatic = scalesCromatic[cromatic][this.root];
+        this.activeNotes = activeNotes[scaleColor]; /// Solo debemos preocuparnos en activar/desactivar acá.
+        this.trigger('scaleChange');
     }
 }

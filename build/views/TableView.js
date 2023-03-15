@@ -1,31 +1,30 @@
-import { scalesCromatic, intervalsText, relativeIntervalsText } from "../models/diccionarioNotas.js";
+import { scalesCromatic, intervalsText, relativeIntervalsText } from "../utils/KeySignatures.js";
 import { HtmlConstructor, HTMLSelectionConstructor } from "./HtmlConstructor.js";
-import { Scale } from "../models/Scale.js";
 export class Table extends HtmlConstructor {
-    constructor(id) {
+    constructor(id, scale) {
         const root = document.getElementById(id);
         if (!root) {
             throw new Error('No root element present!');
         }
         super(root);
         this.id = id;
+        this.scale = scale;
         this.onResetColors = () => {
             this.notesDiv.resetColors(this.notesDiv.elements, 'color1');
             this.colorsDiv.resetColors(this.colorsDiv.elements, 'color1');
             this.intervalsDiv.resetColors(this.intervalsDiv.elements, 'color1');
         };
         this.onSetScale = () => {
-            this.render();
-        };
-        this.render = () => {
             const scaleColor = this.scaleDiv.getValue();
             const note = this.keyDiv.getValue();
-            const scale = new Scale(note, scaleColor);
-            this.tonesDiv.update(scale.color); /// Change positions of the tones in tonesDiv.
-            this.intervalsDiv.update(scale);
-            this.notesDiv.update(scale);
-            this.colorsDiv.update(scale);
-            this.relativeScaleDiv.update(scale);
+            this.scale.changeScale(note, scaleColor); /// activará el evento 'change' que desencadena en render.
+        };
+        this.render = () => {
+            this.tonesDiv.update(this.scale.scaleColor); /// Change positions of the tones in tonesDiv.
+            this.intervalsDiv.update(this.scale);
+            this.notesDiv.update(this.scale);
+            this.colorsDiv.update(this.scale);
+            this.relativeScaleDiv.update(this.scale);
         };
         this.root = root;
         const h3_1 = document.createElement('h3');
@@ -42,7 +41,18 @@ export class Table extends HtmlConstructor {
         this.root.appendChild(h3_2);
         this.relativeScaleDiv = new RelativeScaleDiv(this.root);
         this.resetDiv = new ResetDiv(this.root);
-        this.bindEvents(); //* Acá vamos a bindear los elements
+        this.bindEvents(); //* Acá vamos a bindear los events relacionados a los elementos html.
+        this.bindModel(); //* Acá bindemos los eventos del modelo.
+    }
+    bindModel() {
+        this.scale.on('scaleChange', () => {
+            console.log('scaleChange event');
+            this.render(); /// Cada vez que cambiemos el modelo, vamos a volver a rendear.
+        });
+        this.scale.on('toggleNote', () => {
+            /// No estamos usando este evento, ya que con el evento del HTML podemos rescatar directamente el index del boton que apretamos.
+            //console.log('toggleNote event');
+        });
     }
     eventsMap() {
         return {
@@ -71,6 +81,10 @@ export class Table extends HtmlConstructor {
         if (!index) {
             throw new Error('dataset.value of target element is undefined');
         }
+        this.scale.toggleNote(index);
+        this.toggleElements(index);
+    }
+    toggleElements(index) {
         this.notesDiv.toggleElement(this.notesDiv.elements[index]);
         this.intervalsDiv.toggleElement(this.intervalsDiv.elements[index]);
         this.relativeScaleDiv.toggleElement(this.relativeScaleDiv.elements[index]);
@@ -94,7 +108,7 @@ export class Table extends HtmlConstructor {
     }
 }
 /**
- * In charge of the construction and behaviour of the scales button.
+ * In charge of the construction of html div with the select for the color of the scale.
  */
 class ScaleDiv extends HtmlConstructor {
     constructor(parent) {
@@ -113,10 +127,15 @@ class ScaleDiv extends HtmlConstructor {
         return this.select.value;
     }
 }
+/**
+ * In charge of the construction and update of the div that has the tone distance information.
+ */
 class TonesDiv extends HtmlConstructor {
     constructor(parent) {
         super(parent);
         this.tonesParent = this.addElement('div', { 'class': 'tabla__tonos' });
+        const tonesId = ['tono1', 'tono2', 'tono3', 'tono4', 'tono5', 'semiTono1', 'semiTono2'];
+        const tonesTxt = ['T', 'T', 'T', 'T', 'T', 'S', 'S'];
         for (let i = 0; i < 7; i++) {
             const p = this.addSubElement(this.tonesParent, 'p', { id: tonesId[i], innerText: tonesTxt[i] });
             this.tonesParent.appendChild(p);
@@ -143,11 +162,15 @@ class TonesDiv extends HtmlConstructor {
         });
     }
 }
+/**
+ * In charge of the construction of the select element fot the key of the scale.
+ */
 class KeyDiv extends HtmlConstructor {
     constructor(parent) {
         super(parent);
         const keyDiv = this.addElement('div', { class: 'key' });
         this.select = this.addSubElement(keyDiv, 'select', { id: 'rootNote' });
+        let cromaticNotes = scalesCromatic['major']['c'];
         for (let i = 0; i < cromaticNotes.length; i++) {
             const option = this.addSubElement(this.select, 'option', { value: cromaticNotes[i], innerText: cromaticNotes[i] });
         }
@@ -157,6 +180,9 @@ class KeyDiv extends HtmlConstructor {
         return this.select.value;
     }
 }
+/**
+ * In charge of the construction and update of the div with the intervals buttons.
+ */
 class IntervalsDiv extends HTMLSelectionConstructor {
     constructor(parent) {
         super(parent);
@@ -171,6 +197,9 @@ class IntervalsDiv extends HTMLSelectionConstructor {
         this.updateSelected(this.elements, scale.activeNotes);
     }
 }
+/**
+ * In charge of the construction and update of the div that contains the notes HTML buttons.
+ */
 class NotesDiv extends HTMLSelectionConstructor {
     constructor(parent) {
         super(parent);
@@ -188,6 +217,9 @@ class NotesDiv extends HTMLSelectionConstructor {
         });
     }
 }
+/**
+ * In charge of the construction and update of the div that contains the HTML selects for the colors of the buttons
+ */
 class ColorsDiv extends HTMLSelectionConstructor {
     constructor(parent) {
         super(parent);
@@ -215,6 +247,9 @@ class ColorsDiv extends HTMLSelectionConstructor {
         });
     }
 }
+/**
+ * In charge of the construction and update of the div that contains the relative scale interval buttons.
+ */
 class RelativeScaleDiv extends HTMLSelectionConstructor {
     constructor(parent) {
         super(parent);
@@ -228,6 +263,9 @@ class RelativeScaleDiv extends HTMLSelectionConstructor {
         this.updateSelected(this.elements, scale.activeNotes);
     }
 }
+/**
+ * In charge of the construction of the two last buttons for reset the colors and the notes of the scale.
+ */
 class ResetDiv extends HtmlConstructor {
     constructor(parent) {
         super(parent);
@@ -236,6 +274,3 @@ class ResetDiv extends HtmlConstructor {
         const button2 = this.addSubElement(resetDiv, 'button', { id: 'botonNotes', innerText: 'Reset Notes', class: 'resetNotes' });
     }
 }
-const cromaticNotes = ['C', 'C#', 'Db', 'D', 'D#', 'Eb', 'E', 'F', 'F#', 'Gb', 'G', 'G#', 'Ab', 'A', 'A#', 'Bb', 'B'];
-const tonesId = ['tono1', 'tono2', 'tono3', 'tono4', 'tono5', 'semiTono1', 'semiTono2'];
-const tonesTxt = ['T', 'T', 'T', 'T', 'T', 'S', 'S'];

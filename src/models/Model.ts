@@ -1,4 +1,3 @@
-
 type Callback = () => void;
 
 export interface Events{

@@ -55,13 +55,6 @@ export const scalesCromatic: ScalesCromatic = {
     }
 }
 
-export const scaleIntervals: {[key:string]:number[]} = {
-    major : [2,2,1,2,2,2,1],
-    minor : [2,1,2,2,1,2,2],
-    pentatonicMajor: [2,2,3,2,3],
-    pentatonicMinor: [3,2,2,3,2],
-} 
-
 export const activeNotes:{[key:string]:boolean[]} = {
     major: [true,false,true,false,true,true,false,true,false,true,false,true,true],
     minor: [true,false,true,true,false,true,false,true,true,false,true,false,true],
@@ -71,5 +64,3 @@ export const activeNotes:{[key:string]:boolean[]} = {
 
 export const intervalsText = ['R','2m','2M','3m','3M','4','Tri','5','6m','6M','7m','7M','R'];
 export const relativeIntervalsText = ['3m','3M','4','Tri','5','6m','6M','7m','7M','r','2m','2M','3m'];
-
-export const colorsNotes = ['color2','color2','color2','color2','color2','color2','color2','color2','color2','color2','color2','color2','color2']
