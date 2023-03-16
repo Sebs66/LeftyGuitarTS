@@ -43,11 +43,7 @@ export class HTMLSelectionConstructor extends HtmlConstructor {
 
     toggleElement(element:HTMLElement): void {
         const selected = 'seleccionado'
-        if (element.classList.contains(selected)){
-            element.classList.remove(selected);
-        } else {
-            element.classList.add(selected);
-        }
+        element.classList.toggle(selected)
     }
 
     changeColor(element:HTMLElement,colorClass:string): void {

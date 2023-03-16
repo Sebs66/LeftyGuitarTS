@@ -26,6 +26,10 @@ export class Table extends HtmlConstructor {
             this.colorsDiv.update(this.scale);
             this.relativeScaleDiv.update(this.scale);
         };
+        this.reset = () => {
+            this.scale.reset();
+            this.render();
+        };
         this.root = root;
         const h3_1 = document.createElement('h3');
         h3_1.innerText = 'Escala';
@@ -62,7 +66,7 @@ export class Table extends HtmlConstructor {
             'click:button.intervalos': this.onClickButton.bind(this),
             'change:.tabla__ColoresNotas select': this.onSetColor.bind(this),
             'click:button#botonColores': this.onResetColors,
-            'click:button#botonNotes': this.render,
+            'click:button#botonNotes': this.reset,
         };
     }
     onSetColor(event) {

@@ -146,8 +146,9 @@ class OpenFret {
         this.html.append(this.fret.html);
     }
     fillOpenNotes(tuning) {
-        tuning.reverse();
-        tuning.forEach((openNote, index) => {
+        const copyTunning = [...tuning];
+        copyTunning.reverse();
+        copyTunning.forEach((openNote, index) => {
             this.fret.strings[index].innerText = openNote;
         });
     }
@@ -156,17 +157,110 @@ export class GuitarView {
     constructor(id, scale, tuning) {
         this.scale = scale;
         this.tuning = tuning;
+        this.fillNotes = () => {
+            console.log('fillNotes()');
+            this.deselectNotes();
+            this.openFret.fillOpenNotes(this.tuning);
+            this.neck.fillNotes(this.tuning, this.scale);
+        };
+        this.deselectNotes = () => {
+            const notes = Array.from(document.querySelectorAll('.traste .cuerda .nota'));
+            notes.forEach((note) => {
+                note.classList.remove('seleccionado');
+            });
+        };
+        this.onResetColors = () => {
+            const notesHTML = Array.from(document.querySelectorAll('.traste .nota'));
+            notesHTML.forEach((noteHTML) => {
+                this.changeColor(noteHTML, 'color1');
+            });
+        };
+        this.onResetGuitar = () => {
+            this.scale.reset();
+            this.fillNotes();
+        };
         const parent = document.getElementById(id);
         if (!parent)
             throw new Error(`No element with id "${id}" found!`);
-        parent.classList.add('guitarra');
-        this.strings = new Strings(parent);
-        this.neck = new Neck(parent);
-        this.openFret = new OpenFret(parent);
+        this.parent = parent;
+        this.parent.classList.add('guitarra');
+        this.strings = new Strings(this.parent);
+        this.neck = new Neck(this.parent);
+        this.openFret = new OpenFret(this.parent);
+        this.bindEvents();
+    }
+    renderNotes() {
         this.fillNotes();
     }
-    fillNotes() {
-        this.openFret.fillOpenNotes(this.tuning);
-        this.neck.fillNotes(this.tuning, this.scale);
+    eventsMap() {
+        return {
+            /// Tiene que ser un evento que exista si es aplicado a un dom.
+            'change:select#escala': this.fillNotes,
+            'change:select#rootNote': this.fillNotes,
+            'click:button.intervalos': this.onClickButton.bind(this),
+            'change:.tabla__ColoresNotas select': this.onSetColor.bind(this),
+            'click:button#botonColores': this.onResetColors,
+            'click:button#botonNotes': this.onResetGuitar,
+        };
+    }
+    bindEvents() {
+        const eventsMap = this.eventsMap();
+        for (let eventKey in eventsMap) {
+            const [eventName, selector] = eventKey.split(':');
+            document.querySelectorAll(selector).forEach((element) => {
+                element.addEventListener(eventName, eventsMap[eventKey]); //* Agrega el evento.
+            });
+        }
+    }
+    changeColor(noteHTML, colorClass) {
+        noteHTML.classList.forEach(className => {
+            if (className.includes('color')) {
+                noteHTML.classList.remove(className);
+            }
+        });
+        noteHTML.classList.add(colorClass);
+    }
+    onClickButton(event) {
+        const target = event.target;
+        const index = Number(target.dataset.value);
+        const noteTarget = document.querySelectorAll('.tabla__notas .boton')[index].textContent;
+        if (!noteTarget)
+            return;
+        this.toggleNotes(noteTarget);
+    }
+    onSetColor(event) {
+        const target = event.target;
+        const colorClass = target.selectedOptions[0].value;
+        const index = Number(target.getAttribute('position'));
+        const noteTarget = document.querySelectorAll('.tabla__notas .boton')[index].textContent;
+        if (!noteTarget)
+            return;
+        this.changeAllColors(noteTarget, colorClass); /// ScaleColor element.
+    }
+    toggleNotes(note) {
+        const notesHTML = Array.from(document.querySelectorAll('.traste .nota'));
+        notesHTML.forEach((noteHTML) => {
+            var _a;
+            if (note.toLowerCase() === ((_a = noteHTML.textContent) === null || _a === void 0 ? void 0 : _a.toLowerCase())) {
+                noteHTML.classList.toggle('seleccionado');
+            }
+        });
+    }
+    changeAllColors(note, colorClass) {
+        const notesHTML = Array.from(document.querySelectorAll('.traste .nota'));
+        notesHTML.forEach((noteHTML) => {
+            var _a;
+            if (note.toLowerCase() === ((_a = noteHTML.textContent) === null || _a === void 0 ? void 0 : _a.toLowerCase())) {
+                this.changeColor(noteHTML, colorClass);
+            }
+        });
+    }
+    displayFrets(quantity) {
+        this.neck.frets.forEach((fretInstance) => {
+            fretInstance.html.setAttribute('style', '');
+        });
+        this.neck.frets.slice(quantity).forEach((fretInstance) => {
+            fretInstance.html.setAttribute('style', 'display:None');
+        });
     }
 }

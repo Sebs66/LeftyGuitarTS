@@ -24,7 +24,7 @@ export class Scale extends Model{
             cromatic = 'minor'
         }
         this.scaleCromatic = scalesCromatic[cromatic][this.root]
-        this.activeNotes = activeNotes[scaleColor] /// Solo debemos preocuparnos en activar/desactivar acá.
+        this.activeNotes = [...activeNotes[scaleColor]] /// Solo debemos preocuparnos en activar/desactivar acá.
     }
 
     toggleNote(index:number): void {
@@ -54,4 +54,7 @@ export class Scale extends Model{
         this.trigger('scaleChange');
     }
 
+    reset(){
+        this.activeNotes = [...activeNotes[this.scaleColor]] /// Solo debemos preocuparnos en activar/desactivar acá. 
+    }
 }

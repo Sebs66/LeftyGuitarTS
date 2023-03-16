@@ -7,4 +7,5 @@ const guitarra1 = new GuitarHTML('guitarra1');
 const table = new Table('tabla', scale);
 table.render();
 const guitarra2 = new GuitarView('guitarra2', scale, tuning);
+guitarra2.renderNotes();
 window.guitarra2 = guitarra2;

@@ -54,18 +54,17 @@ export class Table extends HtmlConstructor {
             'click:button.intervalos': this.onClickButton.bind(this), /// Tenemos acceso tanto a la instancia como al target del evento!
             'change:.tabla__ColoresNotas select': this.onSetColor.bind(this),
             'click:button#botonColores': this.onResetColors,
-            'click:button#botonNotes': this.render,
+            'click:button#botonNotes': this.reset,
         }
     }
 
-    onResetColors = () => { /// Arrow function so we can access to the instance of the class with the this keyword.
+    onResetColors = ():void => { /// Arrow function so we can access to the instance of the class with the this keyword.
         this.notesDiv.resetColors(this.notesDiv.elements,'color1');
         this.colorsDiv.resetColors(this.colorsDiv.elements,'color1')
         this.intervalsDiv.resetColors(this.intervalsDiv.elements,'color1')
-
     }
     
-    onSetColor(event:Event){
+    onSetColor(event:Event): void {
         const target =  event.target as HTMLSelectElement
         const colorClass = target.selectedOptions[0].value;
         const index = Number(target.getAttribute('position'));
@@ -75,7 +74,7 @@ export class Table extends HtmlConstructor {
         this.intervalsDiv.changeColor(this.intervalsDiv.elements[index] as HTMLElement,colorClass); 
     }
 
-    onClickButton(event:Event){
+    onClickButton(event:Event): void {
         const target = event.target as HTMLButtonElement
         //console.log(target.dataset.value)
         const index = Number(target.dataset.value);
@@ -98,7 +97,7 @@ export class Table extends HtmlConstructor {
             colorElement.disabled = true;
         }
     }
-    onSetScale = () => {
+    onSetScale: ()=>void = () => {
         const scaleColor = this.scaleDiv.getValue();
         const note = this.keyDiv.getValue();
         this.scale.changeScale(note,scaleColor); /// activará el evento 'change' que desencadena en render.
@@ -114,7 +113,7 @@ export class Table extends HtmlConstructor {
         }
     }
 
-    render = ()=>{
+    render: ()=> void = ()=>{
         this.tonesDiv.update(this.scale.scaleColor); /// Change positions of the tones in tonesDiv.
         this.intervalsDiv.update(this.scale);
         this.notesDiv.update(this.scale);
@@ -122,6 +121,10 @@ export class Table extends HtmlConstructor {
         this.relativeScaleDiv.update(this.scale);
     }
 
+    reset= ()=>{
+        this.scale.reset();
+        this.render();
+    }
 }
 
 /**
