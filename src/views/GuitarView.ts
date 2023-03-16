@@ -1,6 +1,6 @@
 /// This is the builder of the HTML Guitar.
-import { Guitar } from "./Guitar.js";
-import { Scale } from "./models/Scale.js";
+import { Guitar } from "../Guitar.js";
+import { Scale } from "../models/Scale.js";
 
 export class GuitarHTML {
     frets : HTMLElement[] = [];

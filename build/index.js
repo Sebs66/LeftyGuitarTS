@@ -1,5 +1,5 @@
 import { Table } from './views/TableView';
-import { GuitarHTML, GuitarView } from './GuitarView';
+import { GuitarHTML, GuitarView } from './views/GuitarView';
 import { Scale } from './models/Scale';
 const scale = new Scale('C', 'major');
 const tuning = ['E', 'A', 'D', 'G', 'B', 'E'];
