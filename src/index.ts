@@ -11,3 +11,4 @@ const guitarra2 = new GuitarView('guitarra2',scale,tuning);
 guitarra2.renderNotes();
 
 (window as any).guitarra2 = guitarra2;
+(window as any).scale = scale;

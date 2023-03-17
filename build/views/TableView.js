@@ -38,7 +38,7 @@ export class Table extends HtmlConstructor {
         this.tonesDiv = new TonesDiv(this.root);
         this.keyDiv = new KeyDiv(this.root);
         this.intervalsDiv = new IntervalsDiv(this.root);
-        this.notesDiv = new NotesDiv(this.root);
+        this.notesDiv = new NotesDiv(this.root, this.scale);
         this.colorsDiv = new ColorsDiv(this.root);
         const h3_2 = document.createElement('h3');
         h3_2.innerText = 'Intervalos escala relativa:';
@@ -82,7 +82,7 @@ export class Table extends HtmlConstructor {
         const target = event.target;
         //console.log(target.dataset.value)
         const index = Number(target.dataset.value);
-        if (!index) {
+        if (!index && index != 0) {
             throw new Error('dataset.value of target element is undefined');
         }
         this.scale.toggleNote(index);
@@ -193,7 +193,11 @@ class IntervalsDiv extends HTMLSelectionConstructor {
         const colorClass = 'color1';
         this.intervalsParent = this.addElement('div', { class: 'tabla__intervalos' });
         for (let i = 0; i < 13; i++) {
-            const button = this.addSubElement(this.intervalsParent, 'button', { 'data-value': String(i), class: `intervalos ${colorClass}`, innerText: intervalsText[i] });
+            let index = i;
+            if (index === 12) {
+                index = 0;
+            }
+            const button = this.addSubElement(this.intervalsParent, 'button', { 'data-value': String(index), class: `intervalos ${colorClass}`, innerText: intervalsText[i] });
         }
         this.elements = Array.from(this.intervalsParent.children);
     }
@@ -205,12 +209,14 @@ class IntervalsDiv extends HTMLSelectionConstructor {
  * In charge of the construction and update of the div that contains the notes HTML buttons.
  */
 class NotesDiv extends HTMLSelectionConstructor {
-    constructor(parent) {
+    constructor(parent, scale) {
         super(parent);
         this.notesParent = this.addElement('div', { class: 'tabla__notas' });
-        for (let i = 0; i < 13; i++) {
-            const button = this.addSubElement(this.notesParent, 'button', { class: 'boton', innerText: scalesCromatic['major']['c'][i] });
+        for (let i = 0; i < 12; i++) {
+            this.addSubElement(this.notesParent, 'button', { class: 'boton', innerText: scale.scaleCromatic[i] });
         }
+        /// Ultimo boton igual al primero.
+        this.addSubElement(this.notesParent, 'button', { class: 'boton', innerText: 'scale.scaleCromatic[0]' });
         this.elements = Array.from(this.notesParent.children);
     }
     update(scale) {
@@ -219,6 +225,7 @@ class NotesDiv extends HTMLSelectionConstructor {
         this.elements.forEach((element, index) => {
             element.textContent = scale.scaleCromatic[index];
         });
+        this.elements[12].textContent = scale.scaleCromatic[0];
     }
 }
 /**

@@ -116,24 +116,40 @@ class Neck {
             this.strings[`cuerda${i}`] = Array.from(this.html.querySelectorAll(`.cuerda${i} p.nota`));
         }
     }
-    fillNotes(tuning, scale) {
-        console.log('neck.fillNotes');
-        //tuning.reverse();
-        for (let i = 0; i < 6; i++) {
-            const indexOfRoot = scale.scaleCromatic.indexOf(tuning[i]);
-            let notes = [...scale.scaleCromatic.slice(indexOfRoot), ...scale.scaleCromatic.slice(1, indexOfRoot)]; /// Rearranging the notes in the guitarString order.
-            notes = [...notes, ...notes, ...notes];
-            let activeNotes = [...scale.activeNotes.slice(indexOfRoot), ...scale.activeNotes.slice(1, indexOfRoot)]; /// Rearranging the notes in the guitarString order. 
-            activeNotes = [...activeNotes, ...activeNotes, ...activeNotes];
-            this.strings[`cuerda${i + 1}`].forEach((nota, index) => {
-                nota.innerText = notes[index + 1];
-                if (activeNotes[index + 1]) {
-                    nota.classList.add('seleccionado');
-                }
-            });
-        }
+    addSelected(note) {
+        document.querySelectorAll('.traste .nota').forEach(noteHTML => {
+            var _a;
+            if (note.toLowerCase() === ((_a = noteHTML.textContent) === null || _a === void 0 ? void 0 : _a.toLowerCase())) {
+                noteHTML.classList.add('seleccionado');
+            }
+        });
     }
-    toggleNote(note) {
+    removeSelected(note) {
+        document.querySelectorAll('.traste .nota').forEach(noteHTML => {
+            var _a;
+            if (note.toLowerCase() === ((_a = noteHTML.textContent) === null || _a === void 0 ? void 0 : _a.toLowerCase())) {
+                noteHTML.classList.remove('seleccionado');
+            }
+        });
+    }
+    fillNotes(tuning, scale) {
+        //document.querySelectorAll('.traste .nota').forEach((noteHTML)=>noteHTML.textContent='');
+        console.log('neck.fillNotes');
+        const copyTunning = [...tuning];
+        copyTunning.reverse();
+        for (let i = 0; i < 6; i++) {
+            const indexOfRoot = scale.scaleCromatic.indexOf(copyTunning[i]);
+            let notes = [...scale.scaleCromatic.slice(indexOfRoot), ...scale.scaleCromatic.slice(0, indexOfRoot)]; /// Rearranging the notes in the guitarString order.
+            this.strings[`cuerda${i + 1}`].forEach(((notaHTML, index) => { notaHTML.textContent = notes[(index + 1) % 12]; }));
+        }
+        scale.activeNotes.forEach((bool, index) => {
+            if (bool) {
+                this.addSelected(scale.scaleCromatic[index % 12]);
+            }
+            else {
+                this.removeSelected(scale.scaleCromatic[index % 12]);
+            }
+        });
     }
 }
 class OpenFret {
@@ -221,12 +237,18 @@ export class GuitarView {
         noteHTML.classList.add(colorClass);
     }
     onClickButton(event) {
+        /// Hay que verlo según el estado de scales.active notes, no según el toggle.
         const target = event.target;
         const index = Number(target.dataset.value);
         const noteTarget = document.querySelectorAll('.tabla__notas .boton')[index].textContent;
         if (!noteTarget)
             return;
-        this.toggleNotes(noteTarget);
+        if (this.scale.activeNotes[index]) {
+            this.addSelected(noteTarget);
+        }
+        else {
+            this.removeSelected(noteTarget);
+        }
     }
     onSetColor(event) {
         const target = event.target;
@@ -237,12 +259,19 @@ export class GuitarView {
             return;
         this.changeAllColors(noteTarget, colorClass); /// ScaleColor element.
     }
-    toggleNotes(note) {
-        const notesHTML = Array.from(document.querySelectorAll('.traste .nota'));
-        notesHTML.forEach((noteHTML) => {
+    addSelected(note) {
+        document.querySelectorAll('.traste .nota').forEach(noteHTML => {
             var _a;
             if (note.toLowerCase() === ((_a = noteHTML.textContent) === null || _a === void 0 ? void 0 : _a.toLowerCase())) {
-                noteHTML.classList.toggle('seleccionado');
+                noteHTML.classList.add('seleccionado');
+            }
+        });
+    }
+    removeSelected(note) {
+        document.querySelectorAll('.traste .nota').forEach(noteHTML => {
+            var _a;
+            if (note.toLowerCase() === ((_a = noteHTML.textContent) === null || _a === void 0 ? void 0 : _a.toLowerCase())) {
+                noteHTML.classList.remove('seleccionado');
             }
         });
     }

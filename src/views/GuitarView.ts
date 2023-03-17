@@ -126,26 +126,39 @@ class Neck {
         }
     }
 
-    fillNotes(tuning:TuningNotes,scale:Scale){
-        console.log('neck.fillNotes')
-        //tuning.reverse();
-        for (let i = 0; i<6; i++){
-            const indexOfRoot = scale.scaleCromatic.indexOf(tuning[i])
-            let notes = [...scale.scaleCromatic.slice(indexOfRoot),...scale.scaleCromatic.slice(1,indexOfRoot)] /// Rearranging the notes in the guitarString order.
-            notes = [...notes,...notes,...notes]
-            let activeNotes =[...scale.activeNotes.slice(indexOfRoot),...scale.activeNotes.slice(1,indexOfRoot)] /// Rearranging the notes in the guitarString order. 
-            activeNotes = [...activeNotes,...activeNotes,...activeNotes]
-            this.strings[`cuerda${i+1}`].forEach((nota,index)=>{
-                nota.innerText = notes[index+1];
-                if (activeNotes[index+1]){
-                    nota.classList.add('seleccionado')
-                }
-            });
-        } 
+    addSelected(note:string){
+        document.querySelectorAll('.traste .nota').forEach(noteHTML=>{
+            if (note.toLowerCase() === noteHTML.textContent?.toLowerCase()){
+                noteHTML.classList.add('seleccionado');
+            }
+        });
     }
 
-    toggleNote(note:string){
+    removeSelected(note:string){
+        document.querySelectorAll('.traste .nota').forEach(noteHTML=>{
+            if (note.toLowerCase() === noteHTML.textContent?.toLowerCase()){
+                noteHTML.classList.remove('seleccionado');
+            }
+        });
+    }
 
+    fillNotes(tuning:TuningNotes,scale:Scale){
+        //document.querySelectorAll('.traste .nota').forEach((noteHTML)=>noteHTML.textContent='');
+        console.log('neck.fillNotes')
+        const copyTunning = [...tuning]
+        copyTunning.reverse();
+        for (let i = 0; i<6; i++){
+            const indexOfRoot = scale.scaleCromatic.indexOf(copyTunning[i])
+            let notes = [...scale.scaleCromatic.slice(indexOfRoot),...scale.scaleCromatic.slice(0,indexOfRoot)] /// Rearranging the notes in the guitarString order.
+            this.strings[`cuerda${i+1}`].forEach(((notaHTML,index)=>{notaHTML.textContent = notes[(index+1)%12]}))
+        } 
+        scale.activeNotes.forEach((bool,index)=>{
+            if (bool){
+                this.addSelected(scale.scaleCromatic[index%12]);
+            } else {
+                this.removeSelected(scale.scaleCromatic[index%12])
+            }
+        });
     }
 }
 
@@ -245,11 +258,17 @@ export class GuitarView {
     }
 
     onClickButton(event:Event): void {
+        /// Hay que verlo según el estado de scales.active notes, no según el toggle.
         const target = event.target as HTMLButtonElement
         const index = Number(target.dataset.value);
         const noteTarget = document.querySelectorAll('.tabla__notas .boton')[index].textContent;
         if (!noteTarget) return
-        this.toggleNotes(noteTarget);
+        if (this.scale.activeNotes[index]){
+            this.addSelected(noteTarget);
+        } else {
+            this.removeSelected(noteTarget);
+        }
+
     }
 
     onSetColor(event:Event): void {
@@ -262,13 +281,20 @@ export class GuitarView {
 
     }
 
-    toggleNotes(note:string){
-        const notesHTML = Array.from(document.querySelectorAll('.traste .nota'));
-        notesHTML.forEach((noteHTML)=>{
-            if (note.toLowerCase() === noteHTML.textContent?.toLowerCase()){
-                noteHTML.classList.toggle('seleccionado');
+    addSelected(note:string){
+        document.querySelectorAll('.traste .nota').forEach(noteHTML=>{
+            if (note.toLowerCase()===noteHTML.textContent?.toLowerCase()){
+                noteHTML.classList.add('seleccionado');
             }
-        })
+        });
+    }
+
+    removeSelected(note:string){
+        document.querySelectorAll('.traste .nota').forEach(noteHTML=>{
+            if (note.toLowerCase()===noteHTML.textContent?.toLowerCase()){
+                noteHTML.classList.remove('seleccionado');
+            }
+        });
     }
 
     changeAllColors(note:string,colorClass:string): void {

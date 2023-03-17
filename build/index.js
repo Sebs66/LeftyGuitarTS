@@ -9,3 +9,4 @@ table.render();
 const guitarra2 = new GuitarView('guitarra2', scale, tuning);
 guitarra2.renderNotes();
 window.guitarra2 = guitarra2;
+window.scale = scale;
